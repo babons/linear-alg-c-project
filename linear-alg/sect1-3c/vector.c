@@ -26,6 +26,14 @@ struct vector scalarmult(struct vector a, double m) {
 	return r;
 }
 
+double dotproduct(struct vector a, struct vector b) {
+	double prod =
+		(a.x * b.x) +
+		(a.y * b.y) +
+		(a.z * b.z);
+	return prod;
+}
+
 struct vector makevector(double x, double y, double z) {
 	struct vector r;
 
@@ -58,5 +66,6 @@ int main() {
 	printf("equals");
 	printvector(mult);
 
+	printf("dot product is %.2f\n", dotproduct(a, b));
 	return 0;
 }
