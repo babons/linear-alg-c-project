@@ -56,3 +56,48 @@ Linear algebra revolves around these concepts
 If the third vector is on the span of the first two, or two vectors line up, there is redundancy. At least one vector is. When you can remove one without reducing span, they are linearly dependent. One vector can be seen as a linear combination of the others.
 If the third, fourth, fifth, whatever vector adds to the span, it is linearly independent
 
+### SECTION 3 - Linear transformations and matrices
+"Unfortunately, no one can be told what the Matrix is. You have to see it for yourself" - Morpheus
+
+Linear transformation
+	Transformation is a fancy word for function
+		Input vector, output vector
+		Suggest you think in terms of movement
+	Linear
+		Is linear if
+			Lines remain lines
+			The origin remains fixed in place
+		Keeps grid lines parallel and evenly spaced
+		
+Describing trnasformations numerically
+	Need to record where base vectors lie
+		v = [-1, 2] = -1i + 2j
+		Transformed v = -1(Transformed i) + 2(Transformed j)
+	Allows you to know where v is with knowing where i-hat and j-hat are
+		Transformed i = [1, -2]; transformed j = [3, 0]
+		Transformed v = -1[1, -2] + 2[3, 0]
+		Transformed v = [-1, 2] + [6, 0] = [5, 2]
+Linear transformations are described by four numbers:
+	Two coordinates for where i-hat lands [3, -2]
+	Two cooredinates for where j-hat lands [2, 1]
+	[3, -2 | 2, 1]
+	Vector [5, 7]
+		5[3, -2] + 7[2, 1]
+
+	Can be defined as matrix-vector multiplication
+		[3, -2 | 2, 1] * [3, 5] = 3[3, -2] + 5[2, 1] = [19, -1]
+
+Fun example
+	If all of space is rotated by 90 degrees
+		i-hat becomes [0, 1]
+		j-hate becomes [-1, 0]
+		If we had a vector, [x, y]
+		We can apply the transformed i-hat and j-hat
+		[0, 1 | -1, 0] [x, y] = [0, x] + [-y, 0] = [-y, x]
+		
+Shear example
+	i-hat = [1, 0] j-hat = [1, 1]
+
+Other way around
+	Start with matrix [1, 2 | 3, 1]
+	Vector [2, 3] = [11, 8]
