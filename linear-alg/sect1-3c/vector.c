@@ -16,6 +16,16 @@ struct vector vectoradd(struct vector a, struct vector b) {
 	return r;
 }
 
+struct vector scalarmult(struct vector a, double m) {
+	struct vector r;
+
+	r.x = (a.x * m);
+	r.y = (a.y * m);
+	r.z = (a.z * m);
+
+	return r;
+}
+
 struct vector makevector(double x, double y, double z) {
 	struct vector r;
 
@@ -41,6 +51,12 @@ int main() {
 	struct vector sum = vectoradd(a, b);
 
 	printvector(sum);
+
+	struct vector mult = scalarmult(a, 2);
+	printvector(a);
+	printf("times\n2\n");
+	printf("equals");
+	printvector(mult);
 
 	return 0;
 }
