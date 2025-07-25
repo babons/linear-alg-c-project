@@ -101,3 +101,53 @@ Shear example
 Other way around
 	Start with matrix [1, 2 | 3, 1]
 	Vector [2, 3] = [11, 8]
+
+### SECTION 4 – Matrix Multiplication as Composition
+
+Matrix multiplication represents **chaining transformations**.  
+If you apply `M1` then `M2`, the overall effect is the same as applying the single matrix `M2 * M1`.
+
+Think of it like function composition:
+- `f(g(x))` = do `g` first, then `f`
+- In matrix form: `M2(M1(v)) = (M2 * M1) * v`
+
+Matrix multiplication is **associative** but not **commutative**:
+- `(M3 * M2) * M1 = M3 * (M2 * M1)`
+- But `M1 * M2 ≠ M2 * M1`
+
+Each column of the composed matrix shows where the **transformed basis vectors** land after applying the full sequence.
+
+### SECTION 5 – 3D Linear Transformations
+
+Linear transformations in 3D follow the same rules:
+- Each vector transformed by a matrix is a linear combination of its **columns** (i-hat, j-hat, k-hat)
+
+If you apply a 3×3 matrix to a vector `[x, y, z]`, it gives:
+```
+x·(î transformed) + y·(ĵ transformed) + z·(k̂ transformed)
+```
+
+Each transformation:
+- Can rotate, scale, shear, or reflect space in 3D
+- Changes the basis of space itself
+- Still preserves linearity (lines stay lines, origin stays fixed)
+
+### SECTION 6 – The Determinant
+
+The **determinant** of a matrix measures how a transformation **scales space**:
+
+- **2D:** it gives the **area scaling factor**
+- **3D:** it gives the **volume scaling factor**
+
+Important interpretations:
+- `det = 0`: Transformation **collapses space** (e.g. to a line or point); not invertible
+- `det < 0`: Transformation **flips** orientation (reflection)
+- `det > 0`: Orientation is **preserved**
+
+For 2×2 matrices:
+```
+|a  b|
+|c  d| → det = ad - bc
+```
+
+The determinant gives deep insight into the **effect of a matrix on space** — especially when composing transformations.
