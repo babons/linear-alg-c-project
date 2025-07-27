@@ -141,9 +141,9 @@ void performops(int n) {
 			if (get_last_type() == ENTRY_VECTOR) {
 				rmlast();
 				history[--vector_histp] = NULL;
-				printf("bye bye: vector\n");
+				printf("bye bye: vector\n\n");
 			} else {
-				printf("oops: not a vector\n");
+				printf("oops: not a vector\n\n");
 			}
 			break;
 		}
@@ -151,14 +151,27 @@ void performops(int n) {
 			if (get_last_type() == ENTRY_MATRIX) {
 				rmlast();
 				matrixhistory[--matrix_histp] = NULL;
-				printf("bye bye: matrix\n");
+				printf("bye bye: matrix\n\n");
 			} else {
-				printf("oops: not a matrix\n");
+				printf("oops: not a matrix\n\n");
 			}
 			break;
 		}
-		case 99: {
-			printf("godspeed, soldier\n");
+		case 98: { // clear
+			if (vector_histp == 0 && matrix_histp == 0) {
+				printf("oops: empty already\n\n");
+			} else {
+				clear();
+				for (int i = 0; i < vector_histp; i++) {
+					history[i] = NULL;
+				}
+				for (int i = 0; i < matrix_histp; i++) {
+					matrixhistory[i] = NULL;
+				}
+				vector_histp = 0;
+				matrix_histp = 0;
+				printf("\ncleared\n\n");
+			}
 			break;
 		}
 	}

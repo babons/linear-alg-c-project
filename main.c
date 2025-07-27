@@ -15,9 +15,16 @@ int main() {
 		printf("3. Add vectors\n");
 		printf("4. Multiply vectors\n");
 		printf("5. Calculate dot product\n");
+		printf("96. Delete last vector\n");
+		printf("97. Delete last matrix\n");
+		printf("98. Clear\n");
 		printf("99. Exit\n");
 
 		scanf("%d", &option);
+		if (option == 99) {
+			printf("godspeed, soldier\n");
+			return 0;
+		}
 		performops(option);
 
 		while ((c = getchar()) != '\n' && c != EOF);
