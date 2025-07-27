@@ -7,7 +7,7 @@ char* hist[MAXENTRIES];
 char *ap = buf;
 int histp = 0;
 
-char *alloc(size_t n) {
+void *alloc(size_t n) {
 	if (ap + n > buf + MAXBUFSIZE) {
 		printf("oops: buffer full, please clear\n");
 		return NULL;

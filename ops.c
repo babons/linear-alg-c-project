@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include "ops.h"
 #include "io.h"
+#include "mem.h"
 #define MAXENTRIES 128
 
-struct matrix3x3 *matrixthistory[MAXENTRIES]
+struct matrix3x3 *matrixhistory[MAXENTRIES];
 struct vector *history[MAXENTRIES];
 int matrix_histp = 0;
-int histp = 0;
+int vector_histp = 0;
 
 struct matrix3x3 *makematrix(struct vector i, struct vector j, struct vector k) {
-	struct matrix3x3 *r = alloc(sizeof(struct matrix3x3));
+	struct matrix3x3 *r = (struct matrix3x3 *) alloc(sizeof(struct matrix3x3));
 	if (r != NULL) {
 		r->cols[0] = i;
 		r->cols[1] = j;
@@ -23,12 +24,12 @@ struct matrix3x3 *makematrix(struct vector i, struct vector j, struct vector k) 
 }
 
 struct vector *makevector(float x, float y, float z) {
-	struct vector *r = alloc(sizeof(struct vector));
+	struct vector *r = (struct vector *) alloc(sizeof(struct vector));
         if (r != NULL) {
 		r->x = x;
 		r->y = y;
 		r->z = z;
-		history[histp++] = r;
+		history[vector_histp++] = r;
 		return r;
 	} else {
 		printf("oops: max vectors or buffer full\n");
@@ -65,5 +66,67 @@ double dotproduct(struct vector a, struct vector b) {
 }
 
 void performops(int n) {
-	
+	switch(n) {
+		case 1: { // vector creation
+			struct vector a;
+			readvector(&a);
+			struct vector *r = makevector(a.x, a.y, a.z);
+			printvector(*r);
+			break;
+		}
+		case 3: { // vector addition
+			if (vector_histp < 2) {
+				printf("oops: you need two vectors\n");
+				return;
+			}
+			struct vector *a = history[vector_histp - 2];
+			struct vector *b = history[vector_histp - 1];
+			struct vector res = vectoradd(*a, *b);
+
+			struct vector *r = makevector(res.x, res.y, res.z);
+			if (r == NULL) {
+				printf("oops: no more space\n");
+				return;
+			}
+
+			printf("Result: (%f, %f, %f)\n", r->x, r->y, r->z);
+			break;
+		}
+		case 4: { // scalar multiplication
+			if (vector_histp < 1) {
+				printf("oops; please enter something man\n");
+				return;
+                        }
+
+			int n = recordint();
+
+			struct vector *a = history[vector_histp-1];
+			struct vector res = scalarmult(*a, n);
+
+			struct vector *r = makevector(res.x, res.y, res.z);
+			if (r == NULL) {
+				printf("oops: no more space\n");
+				return;
+			}
+
+			printf("Result: (%f, %f, %f)\n", r->x, r->y, r->z);
+			break;
+		}
+		case 5: {
+			if (vector_histp < 2) {
+                                printf("oops: you need two vectors\n");
+                                return;
+                        }
+                        struct vector *a = history[vector_histp - 2];
+                        struct vector *b = history[vector_histp - 1];
+                        float res = dotproduct(*a, *b);
+
+                        printf("Result: %f\n", res);
+                        break;
+		}
+		case 99: {
+			printf("godspeed, soldier\n");
+		}
+	}
 }
+

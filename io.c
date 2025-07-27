@@ -15,12 +15,20 @@ void readvector(struct vector *v) {
 	int c;
 	x = y = z = 0;
 
+	printf("Enter your vector: (i, j, k)");
 	scanf("%f %f %f", &x, &y, &z);
 	v->x = x;
 	v->y = y;
 	v->z = z;
 
 	while ((c = getchar()) != '\n' && c != EOF);
+}
+
+int recordint() {
+	int n;
+	printf("Please enter an integer: ");
+	scanf("%d", &n);
+	return n;
 }
 
 void printvector(struct vector v) {
