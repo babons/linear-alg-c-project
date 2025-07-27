@@ -1,6 +1,10 @@
 #ifndef VECTOROPS
 #define VECTOROPS
 
+struct matrix3x3 {
+	struct vector cols[3];
+}
+
 struct vector {
 	double x;
 	double y;
