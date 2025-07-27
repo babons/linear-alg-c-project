@@ -10,7 +10,7 @@ int matrix_histp = 0;
 int vector_histp = 0;
 
 struct matrix3x3 *makematrix(struct vector i, struct vector j, struct vector k) {
-	struct matrix3x3 *r = (struct matrix3x3 *) alloc(sizeof(struct matrix3x3));
+	struct matrix3x3 *r = (struct matrix3x3 *) alloc(sizeof(struct matrix3x3), ENTRY_MATRIX);
 	if (r != NULL) {
 		r->cols[0] = i;
 		r->cols[1] = j;
@@ -24,7 +24,7 @@ struct matrix3x3 *makematrix(struct vector i, struct vector j, struct vector k) 
 }
 
 struct vector *makevector(float x, float y, float z) {
-	struct vector *r = (struct vector *) alloc(sizeof(struct vector));
+	struct vector *r = (struct vector *) alloc(sizeof(struct vector), ENTRY_VECTOR);
         if (r != NULL) {
 		r->x = x;
 		r->y = y;
@@ -63,6 +63,19 @@ double dotproduct(struct vector a, struct vector b) {
                 (a.y * b.y) +
                 (a.z * b.z);
         return prod;
+}
+
+void delete_last_vector() {
+	if (vector_histp > 0 && hist[vector_histp - 1].ty[e == ENTRY_VECTOR) {
+		rmlast();
+		history[--vector_histp] = NULL;
+	} else {
+		printf("oops: last is not a vector\n");
+	}
+}
+
+void delete_last_matrix() {
+	if (histp
 }
 
 void performops(int n) {
@@ -123,6 +136,23 @@ void performops(int n) {
 
                         printf("Result: %f\n", res);
                         break;
+		}
+		case 96: { // delete last vector (result and/or last input)
+			if (get_last_type() == ENTRY_VECTOR) {
+				rmlast();
+				vector_history[--vector_histp] = NULL;
+				printf("bye bye: vector\n");
+			} else {
+				printf("oops: not a vector\n");
+			}
+		case 97: { // delete last matrix (result and/or last input
+			if (get_last_type() == ENTRY_MATRX) {
+				rmlast();
+				matrix_history[--matrix_histp] = NULL;
+				printf("bye bye: matrix\n");
+			} else {
+				printf("oops: not a matrix\n");
+			}
 		}
 		case 99: {
 			printf("godspeed, soldier\n");

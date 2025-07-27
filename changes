@@ -1,0 +1,237 @@
+diff --git a/io.c b/io.c
+index 62d6630..19121c3 100644
+--- a/io.c
++++ b/io.c
+@@ -15,6 +15,7 @@ void readvector(struct vector *v) {
+ 	int c;
+ 	x = y = z = 0;
+ 
++	printf("Enter your vector: (i, j, k)");
+ 	scanf("%f %f %f", &x, &y, &z);
+ 	v->x = x;
+ 	v->y = y;
+@@ -23,6 +24,13 @@ void readvector(struct vector *v) {
+ 	while ((c = getchar()) != '\n' && c != EOF);
+ }
+ 
++int recordint() {
++	int n;
++	printf("Please enter an integer: ");
++	scanf("%d", &n);
++	return n;
++}
++
+ void printvector(struct vector v) {
+ 	printf("[%.2f, %.2f, %.2f]\n", v.x, v.y, v.z);
+ }
+diff --git a/io.h b/io.h
+index dbd234f..98e0d7d 100644
+--- a/io.h
++++ b/io.h
+@@ -3,7 +3,9 @@
+ 
+ /* chatgpt inspired some of this design -- i have learned a lot */
+ 
++void readmatrix(struct matrix3x3 *m);
+ void readvector(struct vector *v);
++int recordint();
+ void printvector(struct vector v);
+ 
+ #endif
+diff --git a/main.c b/main.c
+index 17201c8..305a65c 100644
+--- a/main.c
++++ b/main.c
+@@ -10,14 +10,15 @@ int main() {
+ 	printf("Welcome to the matrix calculator\n");
+ 	for (;;) {
+ 		printf("Select one of the following:\n");
+-		// printf("1. Create vectors\n");
+-		printf("1. Add vectors\n");
+-		printf("2. Multiply vectors\n");
+-		printf("3. Calculate dot product\n");
+-		printf("4. Exit\n");
++		printf("1. Create vectors\n");
++		printf("2. Create matrices\n");
++		printf("3. Add vectors\n");
++		printf("4. Multiply vectors\n");
++		printf("5. Calculate dot product\n");
++		printf("99. Exit\n");
+ 
+ 		scanf("%d", &option);
+-		performop(option);
++		performops(option);
+ 
+ 		while ((c = getchar()) != '\n' && c != EOF);
+ 
+diff --git a/mem.c b/mem.c
+index 1a1b1b3..518a735 100644
+--- a/mem.c
++++ b/mem.c
+@@ -7,7 +7,7 @@ char* hist[MAXENTRIES];
+ char *ap = buf;
+ int histp = 0;
+ 
+-char *alloc(size_t n) {
++void *alloc(size_t n) {
+ 	if (ap + n > buf + MAXBUFSIZE) {
+ 		printf("oops: buffer full, please clear\n");
+ 		return NULL;
+diff --git a/mem.h b/mem.h
+index 889195a..ed6cf0b 100644
+--- a/mem.h
++++ b/mem.h
+@@ -1,7 +1,7 @@
+-#ifdef MEM
++#ifndef MEM
+ #define MEM
+ 
+-char *alloc(size_t n);
++void *alloc(size_t n);
+ void rmlast();
+ void clear();
+ 
+diff --git a/ops.c b/ops.c
+index 2b515f1..68b7080 100644
+--- a/ops.c
++++ b/ops.c
+@@ -1,15 +1,16 @@
+ #include <stdio.h>
+ #include "ops.h"
+ #include "io.h"
++#include "mem.h"
+ #define MAXENTRIES 128
+ 
+-struct matrix3x3 *matrixthistory[MAXENTRIES]
++struct matrix3x3 *matrixhistory[MAXENTRIES];
+ struct vector *history[MAXENTRIES];
+ int matrix_histp = 0;
+-int histp = 0;
++int vector_histp = 0;
+ 
+ struct matrix3x3 *makematrix(struct vector i, struct vector j, struct vector k) {
+-	struct matrix3x3 *r = alloc(sizeof(struct matrix3x3));
++	struct matrix3x3 *r = (struct matrix3x3 *) alloc(sizeof(struct matrix3x3));
+ 	if (r != NULL) {
+ 		r->cols[0] = i;
+ 		r->cols[1] = j;
+@@ -23,12 +24,12 @@ struct matrix3x3 *makematrix(struct vector i, struct vector j, struct vector k)
+ }
+ 
+ struct vector *makevector(float x, float y, float z) {
+-	struct vector *r = alloc(sizeof(struct vector));
++	struct vector *r = (struct vector *) alloc(sizeof(struct vector));
+         if (r != NULL) {
+ 		r->x = x;
+ 		r->y = y;
+ 		r->z = z;
+-		history[histp++] = r;
++		history[vector_histp++] = r;
+ 		return r;
+ 	} else {
+ 		printf("oops: max vectors or buffer full\n");
+@@ -65,5 +66,67 @@ double dotproduct(struct vector a, struct vector b) {
+ }
+ 
+ void performops(int n) {
+-	
++	switch(n) {
++		case 1: { // vector creation
++			struct vector a;
++			readvector(&a);
++			struct vector *r = makevector(a.x, a.y, a.z);
++			printvector(*r);
++			break;
++		}
++		case 3: { // vector addition
++			if (vector_histp < 2) {
++				printf("oops: you need two vectors\n");
++				return;
++			}
++			struct vector *a = history[vector_histp - 2];
++			struct vector *b = history[vector_histp - 1];
++			struct vector res = vectoradd(*a, *b);
++
++			struct vector *r = makevector(res.x, res.y, res.z);
++			if (r == NULL) {
++				printf("oops: no more space\n");
++				return;
++			}
++
++			printf("Result: (%f, %f, %f)\n", r->x, r->y, r->z);
++			break;
++		}
++		case 4: { // scalar multiplication
++			if (vector_histp < 1) {
++				printf("oops; please enter something man\n");
++				return;
++                        }
++
++			int n = recordint();
++
++			struct vector *a = history[vector_histp-1];
++			struct vector res = scalarmult(*a, n);
++
++			struct vector *r = makevector(res.x, res.y, res.z);
++			if (r == NULL) {
++				printf("oops: no more space\n");
++				return;
++			}
++
++			printf("Result: (%f, %f, %f)\n", r->x, r->y, r->z);
++			break;
++		}
++		case 5: {
++			if (vector_histp < 2) {
++                                printf("oops: you need two vectors\n");
++                                return;
++                        }
++                        struct vector *a = history[vector_histp - 2];
++                        struct vector *b = history[vector_histp - 1];
++                        float res = dotproduct(*a, *b);
++
++                        printf("Result: %f\n", res);
++                        break;
++		}
++		case 99: {
++			printf("godspeed, soldier\n");
++		}
++	}
+ }
++
+diff --git a/ops.h b/ops.h
+index 7125273..d7afc72 100644
+--- a/ops.h
++++ b/ops.h
+@@ -1,17 +1,17 @@
+ #ifndef VECTOROPS
+ #define VECTOROPS
+ 
++struct vector {
++        double x;
++        double y;
++        double z;
++};
++
+ struct matrix3x3 {
+ 	struct vector cols[3];
+-}
+-
+-struct vector {
+-	double x;
+-	double y;
+-	double z;
+ };
+ 
+-struct vector makevector(float x, float y, float z);
++struct vector *makevector(float x, float y, float z);
+ 
+ struct vector vectoradd(struct vector a, struct vector b);
+ 
+@@ -19,4 +19,6 @@ struct vector scalarmult(struct vector a, float m);
+ 
+ double dotproduct(struct vector a, struct vector b);
+ 
++void performops(int n);
++
+ #endif

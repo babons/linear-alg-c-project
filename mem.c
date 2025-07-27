@@ -3,25 +3,41 @@
 #define MAXENTRIES 128
 
 char buf[MAXBUFSIZE];
-char* hist[MAXENTRIES];
+struct Entry hist[MAXENTRIES];
 char *ap = buf;
 int histp = 0;
 
-void *alloc(size_t n) {
+void *alloc(size_t n, enum EntryType type) {
 	if (ap + n > buf + MAXBUFSIZE) {
 		printf("oops: buffer full, please clear\n");
 		return NULL;
-	} else {
-		if (histp >= MAXENTRIES) {
-			printf("oops: hit max entries, please clear\n");
-			return NULL;
-		}
-		hist[histp++] = ap;
-		ap+=n;
-		return hist[histp - 1];
 	}
+	if (histp >= MAXENTRIES) {
+		printf("oops: hit max entries, please clear\n");
+		return NULL;
+	}
+
+	hist[histp].ptr = ap;
+	hist[histp].type = type;
+	histp++;
+
+	ap += n;
+	return hist[histp - 1].ptr;
 }
 
+enum EntryType get_last_type(void) {
+	if (histp > 0) {
+		return hist[histp - 1].type;
+	}
+	return -1;
+}
+
+void *get_last_ptr(void) {
+	if (histrp > 0) {
+		return hist[histp -1].ptr;
+	}
+	return NULL;
+}
 void rmlast() {
 	if (histp > 0) {
 		ap = hist[histp--];
