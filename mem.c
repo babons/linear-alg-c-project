@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "mem.h"
 #define MAXBUFSIZE 8192
 #define MAXENTRIES 128
 
@@ -33,15 +34,14 @@ enum EntryType get_last_type(void) {
 }
 
 void *get_last_ptr(void) {
-	if (histrp > 0) {
+	if (histp > 0) {
 		return hist[histp -1].ptr;
 	}
 	return NULL;
 }
 void rmlast() {
 	if (histp > 0) {
-		ap = hist[histp--];
-		hist[histp] = NULL;
+		ap = hist[--histp].ptr;
 	} else {
 		printf("oops: enter something\n");
 	}
@@ -49,7 +49,8 @@ void rmlast() {
 
 void clear() {
 	while (histp != 0) {
-		hist[--histp] = NULL;
+		hist[--histp].ptr = NULL;
+		hist[histp].type = -1;
 	}
 	ap = buf;
 }

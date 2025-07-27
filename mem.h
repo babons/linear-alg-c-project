@@ -1,5 +1,5 @@
-#ifndef MEM
-#define MEM
+#ifndef MEM_H
+#define MEM_H
 
 #include <stddef.h>
 
@@ -10,7 +10,7 @@ struct Entry {
 	enum EntryType type;
 };
 
-void *alloc(size_t n);
+void *alloc(size_t n, enum EntryType type);
 void rmlast();
 void clear();
 

@@ -4,7 +4,6 @@
 
 void readmatrix(struct matrix3x3 *m) {
 	for (int i = 0; i < 3; i++) {
-		struct vector col;
 		printf("Enter col %d (x y z): ", i+1);
 		readvector(&m->cols[i]);
 	}

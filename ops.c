@@ -64,9 +64,9 @@ double dotproduct(struct vector a, struct vector b) {
                 (a.z * b.z);
         return prod;
 }
-
+/*
 void delete_last_vector() {
-	if (vector_histp > 0 && hist[vector_histp - 1].ty[e == ENTRY_VECTOR) {
+	if (get_last_type() == ENTRY_VECTOR && vector_histp > 0) {
 		rmlast();
 		history[--vector_histp] = NULL;
 	} else {
@@ -77,7 +77,7 @@ void delete_last_vector() {
 void delete_last_matrix() {
 	if (histp
 }
-
+*/
 void performops(int n) {
 	switch(n) {
 		case 1: { // vector creation
@@ -140,22 +140,26 @@ void performops(int n) {
 		case 96: { // delete last vector (result and/or last input)
 			if (get_last_type() == ENTRY_VECTOR) {
 				rmlast();
-				vector_history[--vector_histp] = NULL;
+				history[--vector_histp] = NULL;
 				printf("bye bye: vector\n");
 			} else {
 				printf("oops: not a vector\n");
 			}
+			break;
+		}
 		case 97: { // delete last matrix (result and/or last input
-			if (get_last_type() == ENTRY_MATRX) {
+			if (get_last_type() == ENTRY_MATRIX) {
 				rmlast();
-				matrix_history[--matrix_histp] = NULL;
+				matrixhistory[--matrix_histp] = NULL;
 				printf("bye bye: matrix\n");
 			} else {
 				printf("oops: not a matrix\n");
 			}
+			break;
 		}
 		case 99: {
 			printf("godspeed, soldier\n");
+			break;
 		}
 	}
 }
