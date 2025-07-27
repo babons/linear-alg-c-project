@@ -1,14 +1,23 @@
 #include <stdio.h>
 #include "ops.h"
+#include "io.h"
+#define MAXENTRIES 128
 
-struct vector makevector(float x, float y, float z) {
-        struct vector r;
+struct vector *history[MAXENTRIES];
+int histlength = 0;
 
-        r.x = x;
-        r.y = y;
-        r.z = z;
-
-        return r;
+struct vector *makevector(float x, float y, float z) {
+	struct vector *r = alloc(sizeof(struct vector));
+        if (r != NULL) {
+		r->x = x;
+		r->y = y;
+		r->z = z;
+		history[histlength++] = r;
+		return r;
+	} else {
+		printf("oops: max vectors or buffer full\n");
+		return NULL;
+	}
 }
 
 struct vector vectoradd(struct vector a, struct vector b) {
@@ -38,3 +47,5 @@ double dotproduct(struct vector a, struct vector b) {
                 (a.z * b.z);
         return prod;
 }
+
+void performops(int n);
