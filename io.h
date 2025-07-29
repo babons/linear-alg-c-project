@@ -7,5 +7,6 @@ void readmatrix(struct matrix3x3 *m);
 void readvector(struct vector *v);
 int recordint();
 void printvector(struct vector v);
+void printmatrix(struct matrix3x3 m);
 
 #endif

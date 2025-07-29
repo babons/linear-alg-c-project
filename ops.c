@@ -38,23 +38,32 @@ struct vector *makevector(float x, float y, float z) {
 }
 
 struct vector vectoradd(struct vector a, struct vector b) {
-        struct vector r;
+	struct vector r;
 
-        r.x = (a.x + b.x);
-        r.y = (a.y + b.y);
-        r.z = (a.z + b.z);
+	r.x = (a.x + b.x);
+	r.y = (a.y + b.y);
+	r.z = (a.z + b.z);
 
-        return r;
+	return r;
 }
 
 struct vector scalarmult(struct vector a, float m) {
-        struct vector r;
+	struct vector r;
 
-        r.x = (a.x * m);
-        r.y = (a.y * m);
-        r.z = (a.z * m);
+	r.x = (a.x * m);
+	r.y = (a.y * m);
+	r.z = (a.z * m);
 
-        return r;
+	return r;
+}
+
+struct vector matvecmult(struct matrix3x3 m, struct vector s) {
+	struct vector r;
+	r.x = m.cols[0].x * s.x + m.cols[1].x * s.y + m.cols[2].x * s.z;
+	r.y = m.cols[0].y * s.x + m.cols[1].y * s.y + m.cols[2].y * s.z;
+	r.z = m.cols[0].z * s.x + m.cols[1].z * s.y + m.cols[2].z * s.z;
+
+	return r;
 }
 
 double dotproduct(struct vector a, struct vector b) {
@@ -85,6 +94,13 @@ void performops(int n) {
 			readvector(&a);
 			struct vector *r = makevector(a.x, a.y, a.z);
 			printvector(*r);
+			break;
+		}
+		case 2: { // matrix creation 
+			struct matrix3x3 m;
+			readmatrix(&m);
+			struct matrix3x3 *r = makematrix(m.cols[0], m.cols[1], m.cols[2]);
+			printmatrix(*r);
 			break;
 		}
 		case 3: { // vector addition
@@ -130,12 +146,22 @@ void performops(int n) {
                                 printf("oops: you need two vectors\n");
                                 return;
                         }
-                        struct vector *a = history[vector_histp - 2];
-                        struct vector *b = history[vector_histp - 1];
-                        float res = dotproduct(*a, *b);
+			struct vector *a = history[vector_histp - 2];
+			struct vector *b = history[vector_histp - 1];
+			float res = dotproduct(*a, *b);
 
-                        printf("Result: %f\n", res);
-                        break;
+			printf("Result: %f\n", res);
+			break;
+		}
+		case 6: {
+			if (vector_histp < 1 || matrix_histp < 1) {
+				printf("oops: you are missing something\n");
+				return;
+			}
+			struct matrix3x3 *m = matrixhistory[matrix_histp - 1];
+			struct vector *v = history[vector_histp - 1];
+			struct vector r = matvecmult(*m, *v);
+			printf("Result:\n"); printvector(r);
 		}
 		case 96: { // delete last vector (result and/or last input)
 			if (get_last_type() == ENTRY_VECTOR) {

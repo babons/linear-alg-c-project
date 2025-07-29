@@ -31,5 +31,17 @@ int recordint() {
 }
 
 void printvector(struct vector v) {
-	printf("[%.2f, %.2f, %.2f]\n", v.x, v.y, v.z);
+	printf("[%.2f]\n[%.2f]\n[%.2f]\n", v.x, v.y, v.z);
+}
+
+void printmatrix(struct matrix3x3 m) {
+	printf("[%.2f ", m.cols[0].x);
+	printf("%.2f ", m.cols[1].x);
+	printf("%.2f]\n", m.cols[2].x);
+	printf("[%.2f ", m.cols[0].y);
+	printf("%.2f ", m.cols[1].y);
+	printf("%.2f]\n", m.cols[2].y);
+	printf("[%.2f ", m.cols[0].z);
+	printf("%.2f ", m.cols[1].z);
+	printf("%.2f]\n", m.cols[2].z);
 }

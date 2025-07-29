@@ -15,6 +15,7 @@ int main() {
 		printf("3. Add vectors\n");
 		printf("4. Multiply vectors\n");
 		printf("5. Calculate dot product\n");
+		printf("6. Matrix vector multiplicaion\n");
 		printf("96. Delete last vector\n");
 		printf("97. Delete last matrix\n");
 		printf("98. Clear\n");
