@@ -18,6 +18,8 @@ int main() {
 		printf("6. Calculate dot product\n");
 		printf("7. Matrix vector multiplication\n");
 		printf("8. Matrix matrix multiplication\n");
+		printf("9. Cross product calculation\n");
+		printf("10. Determinant calculation\n");
 		printf("94. Print vector history\n");
 		printf("95. Print matrix history\n");
 		printf("96. Delete last vector\n");

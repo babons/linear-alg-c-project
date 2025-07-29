@@ -27,6 +27,10 @@ struct matrix3x3 matrixmult(struct matrix3x3 a, struct matrix3x3 b);
 
 double dotproduct(struct vector a, struct vector b);
 
+struct vector crossproduct(struct vector a, struct vector b);
+
+double calcmdeterminant(struct matrix3x3 m);
+
 void viewvectors();
 
 void viewmatrices();

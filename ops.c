@@ -96,11 +96,24 @@ struct matrix3x3 matrixmult(struct matrix3x3 a, struct matrix3x3 b) {
 }
 
 double dotproduct(struct vector a, struct vector b) {
-        double prod =
-                (a.x * b.x) +
-                (a.y * b.y) +
-                (a.z * b.z);
-        return prod;
+	double prod =
+			(a.x * b.x) +
+			(a.y * b.y) +
+			(a.z * b.z);
+	return prod;
+}
+
+struct vector crossproduct(struct vector a, struct vector b) {
+	struct vector r;
+	r.x = a.y * b.z - a.z * b.y;
+	r.y = a.z * b.x - a.x * b.z;
+	r.z = a.x * b.y - a.y * b.x;
+	return r;
+}
+
+double calcmdeterminant(struct matrix3x3 m) {
+	double r = dotproduct(m.cols[0], crossproduct(m.cols[1], m.cols[2]));
+	return r;
 }
 
 void viewvectors() {
@@ -247,6 +260,24 @@ void performops(int n) {
 
 			struct matrix3x3 *res = makematrix(r.cols[0], r.cols[1], r.cols[2]);
 			printf("Result:\n"); printmatrix(r);
+			waitforuser();
+			break;
+		}
+		case 9: { // cross product
+			if (vector_histp < 2 && matrix_histp < 1) {
+				printf ("oops: not enough vectors or no matrix\n");
+				return;
+			}
+			printf("Cross product: %.2f\n", crossproduct(*history[vector_histp - 2], *history[vector_histp - 1]));
+			waitforuser();
+			break;
+		}
+		case 10: { // 3d determinant
+			if (matrix_histp < 1) {
+				printf("oops: no matrices found\n");
+				return;
+			}
+			printf("Determinant: %.2f\n", calcmdeterminant(*matrixhistory[matrix_histp - 1]));
 			waitforuser();
 			break;
 		}
