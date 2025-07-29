@@ -30,6 +30,7 @@ void readvector(struct vector *v) {
 
 int recordint() {
 	int n;
+	char c;
 	printf("Please enter an integer: ");
 	scanf("%d", &n);
 	while ((c = getchar()) != '\n' && c != EOF);

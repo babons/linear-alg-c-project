@@ -13,9 +13,10 @@ int main() {
 		printf("1. Create vectors\n");
 		printf("2. Create matrices\n");
 		printf("3. Add vectors\n");
-		printf("4. Multiply vectors\n");
-		printf("5. Calculate dot product\n");
-		printf("6. Matrix vector multiplicaion\n");
+		printf("4. Multiply vector (scalar)\n");
+		printf("5. Multiply matrix (scalar)\n");
+		printf("6. Calculate dot product\n");
+		printf("7. Matrix vector multiplicaion\n");
 		printf("94. Print vector history\n");
 		printf("95. Print matrix history\n");
 		printf("96. Delete last vector\n");

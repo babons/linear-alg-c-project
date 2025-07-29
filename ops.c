@@ -47,12 +47,22 @@ struct vector vectoradd(struct vector a, struct vector b) {
 	return r;
 }
 
-struct vector scalarmult(struct vector a, float m) {
+struct vector vscalarmult(struct vector a, float m) {
 	struct vector r;
 
 	r.x = (a.x * m);
 	r.y = (a.y * m);
 	r.z = (a.z * m);
+
+	return r;
+}
+
+struct matrix3x3 mscalarmult(struct matrix3x3 a, float m) {
+	struct matrix3x3 r;
+
+	r.cols[0] = vscalarmult(a.cols[0], m);
+	r.cols[1] = vscalarmult(a.cols[1], m);
+	r.cols[2] = vscalarmult(a.cols[2], m);
 
 	return r;
 }
@@ -124,7 +134,7 @@ void performops(int n) {
 			waitforuser();
 			break;
 		}
-		case 4: { // scalar multiplication
+		case 4: { // vector scalar multiplication
 			if (vector_histp < 1) {
 				printf("oops; please enter something man\n");
 				return;
@@ -133,7 +143,7 @@ void performops(int n) {
 			int n = recordint();
 
 			struct vector *a = history[vector_histp-1];
-			struct vector res = scalarmult(*a, n);
+			struct vector res = vscalarmult(*a, n);
 
 			struct vector *r = makevector(res.x, res.y, res.z);
 			if (r == NULL) {
@@ -145,7 +155,28 @@ void performops(int n) {
 			waitforuser();
 			break;
 		}
-		case 5: {
+		case 5: { // matrix scalar mult
+			if (matrix_histp < 1) {
+				printf("oops; please enter something man\n");
+				return;
+            }
+
+			int n = recordint();
+
+			struct matrix3x3 *a = matrixhistory[matrix_histp-1];
+			struct matrix3x3 res = mscalarmult(*a, n);
+
+			struct matrix3x3 *r = makematrix(res.cols[0], res.cols[1], res.cols[2]);
+			if (r == NULL) {
+				printf("oops: no more space\n");
+				return;
+			}
+
+			printmatrix(*r);
+			waitforuser();
+			break;
+		}
+		case 6: { // calc dot product
 			if (vector_histp < 2) {
                                 printf("oops: you need two vectors\n");
                                 return;
@@ -158,7 +189,7 @@ void performops(int n) {
 			waitforuser();
 			break;
 		}
-		case 6: {
+		case 7: { // matrix vector mult
 			if (vector_histp < 1 || matrix_histp < 1) {
 				printf("oops: you are missing something\n");
 				return;
@@ -171,6 +202,9 @@ void performops(int n) {
 			printf("Result:\n"); printvector(r);
 			waitforuser();
 			break;
+		}
+		case 8: { // matrix matrix mult
+
 		}
 		case 94: {
 			viewvectors();
@@ -212,7 +246,7 @@ void performops(int n) {
 				}
 				vector_histp = 0;
 				matrix_histp = 0;
-				printf("\ncleared\n\n");
+				printf("\ncleared\n");
 			}
 			waitforuser();
 			break;
