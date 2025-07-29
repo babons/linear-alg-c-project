@@ -73,20 +73,20 @@ double dotproduct(struct vector a, struct vector b) {
                 (a.z * b.z);
         return prod;
 }
-/*
-void delete_last_vector() {
-	if (get_last_type() == ENTRY_VECTOR && vector_histp > 0) {
-		rmlast();
-		history[--vector_histp] = NULL;
-	} else {
-		printf("oops: last is not a vector\n");
+
+void viewvectors() {
+	if (vector_histp < 1) {
+		printf("\noops: you need to have atleast one vector!\n\n");
+		return;
 	}
+	printf("\nYou have %d vectors: \n", vector_histp);
+	for (int i = 0; i < vector_histp; i++) {
+		printf("%d.\n", i);
+		printvector(*history[i]);
+	}
+	printf("\n");
 }
 
-void delete_last_matrix() {
-	if (histp
-}
-*/
 void performops(int n) {
 	switch(n) {
 		case 1: { // vector creation
@@ -94,6 +94,7 @@ void performops(int n) {
 			readvector(&a);
 			struct vector *r = makevector(a.x, a.y, a.z);
 			printvector(*r);
+			waitforuser();
 			break;
 		}
 		case 2: { // matrix creation 
@@ -101,6 +102,7 @@ void performops(int n) {
 			readmatrix(&m);
 			struct matrix3x3 *r = makematrix(m.cols[0], m.cols[1], m.cols[2]);
 			printmatrix(*r);
+			waitforuser();
 			break;
 		}
 		case 3: { // vector addition
@@ -119,13 +121,14 @@ void performops(int n) {
 			}
 
 			printf("Result: (%f, %f, %f)\n", r->x, r->y, r->z);
+			waitforuser();
 			break;
 		}
 		case 4: { // scalar multiplication
 			if (vector_histp < 1) {
 				printf("oops; please enter something man\n");
 				return;
-                        }
+            }
 
 			int n = recordint();
 
@@ -138,7 +141,8 @@ void performops(int n) {
 				return;
 			}
 
-			printf("Result: (%f, %f, %f)\n", r->x, r->y, r->z);
+			printvector(*r);
+			waitforuser();
 			break;
 		}
 		case 5: {
@@ -151,6 +155,7 @@ void performops(int n) {
 			float res = dotproduct(*a, *b);
 
 			printf("Result: %f\n", res);
+			waitforuser();
 			break;
 		}
 		case 6: {
@@ -161,7 +166,16 @@ void performops(int n) {
 			struct matrix3x3 *m = matrixhistory[matrix_histp - 1];
 			struct vector *v = history[vector_histp - 1];
 			struct vector r = matvecmult(*m, *v);
+
+			struct vector *res = makevector(r.x, r.y, r.z);
 			printf("Result:\n"); printvector(r);
+			waitforuser();
+			break;
+		}
+		case 94: {
+			viewvectors();
+			waitforuser();
+			break;
 		}
 		case 96: { // delete last vector (result and/or last input)
 			if (get_last_type() == ENTRY_VECTOR) {
@@ -171,6 +185,7 @@ void performops(int n) {
 			} else {
 				printf("oops: not a vector\n\n");
 			}
+			waitforuser();
 			break;
 		}
 		case 97: { // delete last matrix (result and/or last input
@@ -181,6 +196,7 @@ void performops(int n) {
 			} else {
 				printf("oops: not a matrix\n\n");
 			}
+			waitforuser();
 			break;
 		}
 		case 98: { // clear
@@ -198,6 +214,7 @@ void performops(int n) {
 				matrix_histp = 0;
 				printf("\ncleared\n\n");
 			}
+			waitforuser();
 			break;
 		}
 	}

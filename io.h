@@ -3,6 +3,7 @@
 
 /* chatgpt inspired some of this design -- i have learned a lot */
 
+void waitforuser();
 void readmatrix(struct matrix3x3 *m);
 void readvector(struct vector *v);
 int recordint();

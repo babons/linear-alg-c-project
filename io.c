@@ -2,6 +2,11 @@
 #include "ops.h"
 #include "io.h"
 
+void waitforuser() {
+	printf("\nhit enter to continue");
+	while (getchar() != '\n');
+}
+
 void readmatrix(struct matrix3x3 *m) {
 	for (int i = 0; i < 3; i++) {
 		printf("Enter col %d (x y z): ", i+1);
@@ -14,7 +19,7 @@ void readvector(struct vector *v) {
 	int c;
 	x = y = z = 0;
 
-	printf("Enter your vector: (i, j, k)");
+	printf("Enter your vector: (i, j, k): ");
 	scanf("%f %f %f", &x, &y, &z);
 	v->x = x;
 	v->y = y;
@@ -27,6 +32,7 @@ int recordint() {
 	int n;
 	printf("Please enter an integer: ");
 	scanf("%d", &n);
+	while ((c = getchar()) != '\n' && c != EOF);
 	return n;
 }
 

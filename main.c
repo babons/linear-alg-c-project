@@ -16,19 +16,21 @@ int main() {
 		printf("4. Multiply vectors\n");
 		printf("5. Calculate dot product\n");
 		printf("6. Matrix vector multiplicaion\n");
+		printf("94. Print vector history\n");
+		printf("95. Print matrix history\n");
 		printf("96. Delete last vector\n");
 		printf("97. Delete last matrix\n");
 		printf("98. Clear\n");
 		printf("99. Exit\n");
+		printf("\n\nInput: ");
 
 		scanf("%d", &option);
 		if (option == 99) {
 			printf("godspeed, soldier\n");
 			return 0;
 		}
-		performops(option);
-
 		while ((c = getchar()) != '\n' && c != EOF);
+		performops(option);
 
 
 	}
