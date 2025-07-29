@@ -76,6 +76,25 @@ struct vector matvecmult(struct matrix3x3 m, struct vector s) {
 	return r;
 }
 
+struct matrix3x3 matrixmult(struct matrix3x3 a, struct matrix3x3 b) {
+	struct matrix3x3 r;
+	struct vector row0 = {a.cols[0].x, a.cols[1].x, a.cols[2].x};
+	struct vector row1 = {a.cols[0].y, a.cols[1].y, a.cols[2].y};
+	struct vector row2 = {a.cols[0].z, a.cols[1].z, a.cols[2].z};
+
+	r.cols[0].x = dotproduct(row0, b.cols[0]);
+	r.cols[1].x = dotproduct(row0, b.cols[1]);
+	r.cols[2].x = dotproduct(row0, b.cols[2]);
+	r.cols[0].y = dotproduct(row1, b.cols[0]);
+	r.cols[1].y = dotproduct(row1, b.cols[1]);
+	r.cols[2].y = dotproduct(row1, b.cols[2]);
+	r.cols[0].z = dotproduct(row2, b.cols[0]);
+	r.cols[1].z = dotproduct(row2, b.cols[1]);
+	r.cols[2].z = dotproduct(row2, b.cols[2]);
+
+	return r;
+}
+
 double dotproduct(struct vector a, struct vector b) {
         double prod =
                 (a.x * b.x) +
@@ -86,13 +105,26 @@ double dotproduct(struct vector a, struct vector b) {
 
 void viewvectors() {
 	if (vector_histp < 1) {
-		printf("\noops: you need to have atleast one vector!\n\n");
+		printf("\noops: you need to have at least one vector!\n\n");
 		return;
 	}
 	printf("\nYou have %d vectors: \n", vector_histp);
 	for (int i = 0; i < vector_histp; i++) {
 		printf("%d.\n", i);
 		printvector(*history[i]);
+	}
+	printf("\n");
+}
+
+void viewmatrices() {
+	if (matrix_histp < 1) {
+		printf("\noops: missing matrices!!!\n\n");
+		return;
+	}
+	printf("\nYou have %d matrices: \n", matrix_histp);
+	for (int i = 0; i < matrix_histp; i++) {
+		printf("%d.\n", i);
+		printmatrix(*matrixhistory[i]);
 	}
 	printf("\n");
 }
@@ -204,10 +236,27 @@ void performops(int n) {
 			break;
 		}
 		case 8: { // matrix matrix mult
+			if (matrix_histp < 2) {
+				printf("oops: you only have %d matrices\n", matrix_histp);
+				return;
+			}
+			struct matrix3x3 r = matrixmult(
+				*matrixhistory[matrix_histp - 2],
+				*matrixhistory[matrix_histp - 1]
+			);
 
+			struct matrix3x3 *res = makematrix(r.cols[0], r.cols[1], r.cols[2]);
+			printf("Result:\n"); printmatrix(r);
+			waitforuser();
+			break;
 		}
 		case 94: {
 			viewvectors();
+			waitforuser();
+			break;
+		}
+		case 95: {
+			viewmatrices();
 			waitforuser();
 			break;
 		}
