@@ -159,3 +159,80 @@ For 2×2 matrices:
 ```
 
 The determinant gives deep insight into the **effect of a matrix on space** — especially when composing transformations.
+
+### Section 7 - Inverse matricies, column space, and null space
+-- Gaussian Elimination and Row Echelon Form are not covered. Will do a seperate section on those after.
+Linear system of equations -- totally haven't seen this before. But wait, it's neat.
+3x + 1y + 4z = 1
+5x + 9y + 2z = 6
+5x + 3y + 5z = 8
+
+    A	   x   v
+[ 3 1 4 ] [x] [1]
+[ 5 9 2 ] [y] [6]
+[ 5 3 5 ] [z] [8]
+
+AX = v
+A - Matrix
+X - Vector
+v - Output / Transformed Vector
+
+To solve, consider a couple things
+Does the answer lower a dimension (i.e. 2D transforming into squashed line)
+
+Playing the transformation in reverse helps us when looking for the answer
+
+Inverse of A denoted by
+
+A^-1
+
+Result of (A^-1)*(A) = [], or, the identity transformation. Columns are 1,0 and 0,1
+
+AX = v
+(A^-1)*A*X = (A^-1)v
+
+When the determinant is 0, there is no inverse, in the function sense.
+
+When the output of a transformation is a line, the transformation has a rank of one.
+
+If vectors land on a 2D plane, then it is Rank 2.
+
+Rank is the number of dimensions in an output.
+
+All possible outputs of Av = column space of A.
+
+Span of base columns = column space
+
+Rank is the number of dimensions in the column space.
+When rank equals the number of columns in the column space, the matrix is Full Rank.
+
+When a 3D transformation squishes all of space into a line, there is an entire plane which lands on the origin.
+
+Set of vectors which land on the origin are considered "Null Space" or the "Kernel" of the matrix
+
+Ax = v
+When v is the "zero vector" i.e. [0,0], null space gives all possible solutions.
+
+Column space lets us know when a solution exists, null space helps us understand what the set of all possible solutions look like.
+
+### Row Echelon Form notes
+I learned this at some point in my academic career, definitely not for this context, though.
+
+Row Echelon Form (REF)
+
+If a matrix is in REF there are a set of properties:
+Zero Rows at the buttom - If any rows are all zeros, they should be at the bottom
+
+Leading 1s - First entry of a non-zero row (leading entry) can be any non-zero numner
+
+Staggered Leading 1s - Leading entry in a row must be to the right of the leading entry in the row above it.
+
+
+Reduced Row Echelon Form (RREF)
+- Zero Rows at the bottom - Any rows with all zeros must be at the bottom
+- Leading entries - First non-zero must be 1
+- Staggered Leading Entries - Leading 1 in each row must be to the right of the leading 1
+- Column of Leading 1s - Each leading 1 is the only non-zero entry.
+
+### Guassian Elimination
+sick so i will get this done later
