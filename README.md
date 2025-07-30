@@ -1,5 +1,5 @@
 ### Right, an actual description of what I am doing
-This is a report I am using to store notes and projects related to learning linear algebra.
+This is a repo I am using to store notes and projects related to learning linear algebra.
 I am going through the online course "Essence of linear algebra" by 3blue1brown here: https://youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&si=0ELJJx5L6hInWr1Y
 This is also serving as an extension of my C learning journey.
 I am building an interactive linear alg calculator of sorts. It is proving to be very *fun*.
