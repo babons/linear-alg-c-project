@@ -39,6 +39,8 @@ float getelement(struct matrix m, int i, int j);
 
 struct matrix cofactormatrix(struct matrix m);
 
+struct matrix tranposematrix(struct matrix m);
+
 struct matrix inversematrix(struct matrix m);
 
 void viewvectors();
