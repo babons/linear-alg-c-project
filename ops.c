@@ -4,13 +4,13 @@
 #include "mem.h"
 #define MAXENTRIES 128
 
-struct matrix3x3 *matrixhistory[MAXENTRIES];
+struct matrix *matrixhistory[MAXENTRIES];
 struct vector *history[MAXENTRIES];
 int matrix_histp = 0;
 int vector_histp = 0;
 
-struct matrix3x3 *makematrix(struct vector i, struct vector j, struct vector k) {
-	struct matrix3x3 *r = (struct matrix3x3 *) alloc(sizeof(struct matrix3x3), ENTRY_MATRIX);
+struct matrix *makematrix(struct vector i, struct vector j, struct vector k) {
+	struct matrix *r = (struct matrix *) alloc(sizeof(struct matrix), ENTRY_MATRIX);
 	if (r != NULL) {
 		r->cols[0] = i;
 		r->cols[1] = j;
@@ -57,8 +57,8 @@ struct vector vscalarmult(struct vector a, float m) {
 	return r;
 }
 
-struct matrix3x3 mscalarmult(struct matrix3x3 a, float m) {
-	struct matrix3x3 r;
+struct matrix mscalarmult(struct matrix a, float m) {
+	struct matrix r;
 
 	r.cols[0] = vscalarmult(a.cols[0], m);
 	r.cols[1] = vscalarmult(a.cols[1], m);
@@ -67,7 +67,7 @@ struct matrix3x3 mscalarmult(struct matrix3x3 a, float m) {
 	return r;
 }
 
-struct vector matvecmult(struct matrix3x3 m, struct vector s) {
+struct vector matvecmult(struct matrix m, struct vector s) {
 	struct vector r;
 	r.x = m.cols[0].x * s.x + m.cols[1].x * s.y + m.cols[2].x * s.z;
 	r.y = m.cols[0].y * s.x + m.cols[1].y * s.y + m.cols[2].y * s.z;
@@ -76,8 +76,8 @@ struct vector matvecmult(struct matrix3x3 m, struct vector s) {
 	return r;
 }
 
-struct matrix3x3 matrixmult(struct matrix3x3 a, struct matrix3x3 b) {
-	struct matrix3x3 r;
+struct matrix matrixmult(struct matrix a, struct matrix b) {
+	struct matrix r;
 	struct vector row0 = {a.cols[0].x, a.cols[1].x, a.cols[2].x};
 	struct vector row1 = {a.cols[0].y, a.cols[1].y, a.cols[2].y};
 	struct vector row2 = {a.cols[0].z, a.cols[1].z, a.cols[2].z};
@@ -111,9 +111,13 @@ struct vector crossproduct(struct vector a, struct vector b) {
 	return r;
 }
 
-double calcmdeterminant(struct matrix3x3 m) {
+double calcmdeterminant(struct matrix m) {
 	double r = dotproduct(m.cols[0], crossproduct(m.cols[1], m.cols[2]));
 	return r;
+}
+
+struct matrix inversematrix(struct matrix m) {
+
 }
 
 void viewvectors() {
@@ -153,9 +157,9 @@ void performops(int n) {
 			break;
 		}
 		case 2: { // matrix creation 
-			struct matrix3x3 m;
+			struct matrix m;
 			readmatrix(&m);
-			struct matrix3x3 *r = makematrix(m.cols[0], m.cols[1], m.cols[2]);
+			struct matrix *r = makematrix(m.cols[0], m.cols[1], m.cols[2]);
 			printmatrix(*r);
 			waitforuser();
 			break;
@@ -208,10 +212,10 @@ void performops(int n) {
 
 			int n = recordint();
 
-			struct matrix3x3 *a = matrixhistory[matrix_histp-1];
-			struct matrix3x3 res = mscalarmult(*a, n);
+			struct matrix *a = matrixhistory[matrix_histp-1];
+			struct matrix res = mscalarmult(*a, n);
 
-			struct matrix3x3 *r = makematrix(res.cols[0], res.cols[1], res.cols[2]);
+			struct matrix *r = makematrix(res.cols[0], res.cols[1], res.cols[2]);
 			if (r == NULL) {
 				printf("oops: no more space\n");
 				return;
@@ -239,7 +243,7 @@ void performops(int n) {
 				printf("oops: you are missing something\n");
 				return;
 			}
-			struct matrix3x3 *m = matrixhistory[matrix_histp - 1];
+			struct matrix *m = matrixhistory[matrix_histp - 1];
 			struct vector *v = history[vector_histp - 1];
 			struct vector r = matvecmult(*m, *v);
 
@@ -253,12 +257,12 @@ void performops(int n) {
 				printf("oops: you only have %d matrices\n", matrix_histp);
 				return;
 			}
-			struct matrix3x3 r = matrixmult(
+			struct matrix r = matrixmult(
 				*matrixhistory[matrix_histp - 2],
 				*matrixhistory[matrix_histp - 1]
 			);
 
-			struct matrix3x3 *res = makematrix(r.cols[0], r.cols[1], r.cols[2]);
+			struct matrix *res = makematrix(r.cols[0], r.cols[1], r.cols[2]);
 			printf("Result:\n"); printmatrix(r);
 			waitforuser();
 			break;

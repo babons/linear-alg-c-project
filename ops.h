@@ -7,29 +7,31 @@ struct vector {
         double z;
 };
 
-struct matrix3x3 {
+struct matrix {
 	struct vector cols[3];
 };
 
 struct vector *makevector(float x, float y, float z);
 
-struct matrix3x3 *makematrix(struct vector a, struct vector b, struct vector c);
+struct matrix *makematrix(struct vector a, struct vector b, struct vector c);
 
 struct vector vectoradd(struct vector a, struct vector b);
 
 struct vector vscalarmult(struct vector a, float m);
 
-struct matrix3x3 mscalarmult(struct matrix3x3 a, float m);
+struct matrix mscalarmult(struct matrix a, float m);
 
-struct vector matvecmult(struct matrix3x3 m, struct vector s);
+struct vector matvecmult(struct matrix m, struct vector s);
 
-struct matrix3x3 matrixmult(struct matrix3x3 a, struct matrix3x3 b);
+struct matrix matrixmult(struct matrix a, struct matrix b);
 
 double dotproduct(struct vector a, struct vector b);
 
 struct vector crossproduct(struct vector a, struct vector b);
 
-double calcmdeterminant(struct matrix3x3 m);
+double calcmdeterminant(struct matrix m);
+
+struct matrix inversematrix(struct matrix m);
 
 void viewvectors();
 

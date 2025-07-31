@@ -7,7 +7,7 @@ void waitforuser() {
 	while (getchar() != '\n');
 }
 
-void readmatrix(struct matrix3x3 *m) {
+void readmatrix(struct matrix *m) {
 	for (int i = 0; i < 3; i++) {
 		printf("Enter col %d (x y z): ", i+1);
 		readvector(&m->cols[i]);
@@ -41,7 +41,7 @@ void printvector(struct vector v) {
 	printf("[%.2f]\n[%.2f]\n[%.2f]\n", v.x, v.y, v.z);
 }
 
-void printmatrix(struct matrix3x3 m) {
+void printmatrix(struct matrix m) {
 	printf("[%.2f ", m.cols[0].x);
 	printf("%.2f ", m.cols[1].x);
 	printf("%.2f]\n", m.cols[2].x);
