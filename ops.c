@@ -169,8 +169,28 @@ struct matrix cofactormatrix(struct matrix m) {
 	return cof;
 }
 
-struct matrix inversematrix(struct matrix m) {
+struct matrix transposematrix(struct matrix m) {
+	struct matrix r;
 
+	r.cols[0].x = m.cols[0].x;
+	r.cols[0].y = m.cols[1].x;
+	r.cols[0].z = m.cols[2].x;
+	r.cols[1].x = m.cols[0].y;
+	r.cols[1].y = m.cols[1].y;
+	r.cols[1].z = m.cols[2].y;
+	r.cols[2].x = m.cols[0].z;
+	r.cols[2].y = m.cols[1].z;
+	r.cols[2].z = m.cols[2].z;
+
+	return r;
+}
+
+struct matrix inversematrix(struct matrix m) {
+	struct matrix inverse;
+	struct matrix adjugate = transposematrix(cofactormatrix(m));
+	inverse = mscalarmult(adjugate, (1/calcmdeterminant(m)));
+
+	return inverse;
 }
 
 void viewvectors() {
@@ -345,6 +365,26 @@ void performops(int n) {
 			struct matrix r = cofactormatrix(*matrixhistory[matrix_histp - 1]);
 			struct matrix *res = makematrix(r.cols[0], r.cols[1], r.cols[2]);
 			printf("Cofactor Matrix:\n");
+			printmatrix(r);
+			waitforuser();
+			break;
+		} case 12: { // transpose matrix
+			if (matrix_histp < 1) {
+				printf("oops: no matrices found\n");
+			}
+			struct matrix r = transposematrix(*matrixhistory[matrix_histp - 1]);
+			struct matrix *res = makematrix(r.cols[0], r.cols[1], r.cols[2]);
+			printf("Transposed Matrix:\n");
+			printmatrix(r);
+			waitforuser();
+			break;
+		} case 13: { // inverse matrix
+			if (matrix_histp < 1) {
+				printf("oops: no matrices found\n");
+			}
+			struct matrix r = inversematrix(*matrixhistory[matrix_histp - 1]);
+			struct matrix *res = makematrix(r.cols[0], r.cols[1], r.cols[2]);
+			printf("Inveresed Matrix:\n");
 			printmatrix(r);
 			waitforuser();
 			break;
