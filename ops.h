@@ -31,6 +31,14 @@ struct vector crossproduct(struct vector a, struct vector b);
 
 double calcmdeterminant(struct matrix m);
 
+double calccofactor(struct matrix m, int i, int j);
+
+void getotherelement(int i, int *one, int *two);
+
+float getelement(struct matrix m, int i, int j);
+
+struct matrix cofactormatrix(struct matrix m);
+
 struct matrix inversematrix(struct matrix m);
 
 void viewvectors();

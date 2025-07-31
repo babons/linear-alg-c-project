@@ -116,6 +116,59 @@ double calcmdeterminant(struct matrix m) {
 	return r;
 }
 
+void getotherelement(int i, int *one, int *two) {
+	if (i == 0) {
+		*one = 1;
+		*two = 2;
+	} else if (i == 1) {
+		*one = 0;
+		*two = 2;
+	} else if (i == 2) {
+		*one = 0;
+		*two = 1;
+	} else {
+		return;
+	}
+}
+
+float getelement(struct matrix m, int i, int j) {
+	switch (i) {
+		case 0: return m.cols[j].x; break;
+		case 1: return m.cols[j].y; break;
+		case 2: return m.cols[j].z; break;
+	}
+}
+
+double calccofactor(struct matrix m, int i, int j) {
+	float a, b, c, d; // elements outside of the selected row/col
+	int row1, row2, col1, col2;
+	getotherelement(j, &col1, &col2);
+	getotherelement(i, &row1, &row2);
+	a = getelement(m, row1, col1);
+	b = getelement(m, row1, col2);
+	c = getelement(m, row2, col1);
+	d = getelement(m, row2, col2);
+
+	return a*d - b*c;
+}
+
+struct matrix cofactormatrix(struct matrix m) {
+	struct matrix cof;
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			float sign = (i + j) % 2 == 0 ? 1.0 : -1.0;
+			float cofactor = sign * calccofactor(m, i, j);
+			switch (i) {
+				case 0: cof.cols[j].x = cofactor; break;
+				case 1: cof.cols[j].y = cofactor; break;
+				case 2: cof.cols[j].z = cofactor; break;
+			}
+		}
+	}
+
+	return cof;
+}
+
 struct matrix inversematrix(struct matrix m) {
 
 }
@@ -282,6 +335,17 @@ void performops(int n) {
 				return;
 			}
 			printf("Determinant: %.2f\n", calcmdeterminant(*matrixhistory[matrix_histp - 1]));
+			waitforuser();
+			break;
+		}
+		case 11: {// cofactor calc
+			if (matrix_histp < 1) {
+				printf("oops: no matrices found\n");
+			}
+			struct matrix r = cofactormatrix(*matrixhistory[matrix_histp - 1]);
+			struct matrix *res = makematrix(r.cols[0], r.cols[1], r.cols[2]);
+			printf("Cofactor Matrix:\n");
+			printmatrix(r);
 			waitforuser();
 			break;
 		}
