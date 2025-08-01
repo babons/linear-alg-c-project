@@ -1,7 +1,7 @@
 ### Right, an actual description of what I am doing
 This repo is for notes and projects I have taken/made while learning linear alg.
 
-Edit: I am going through the course below, but I am also learning the "technical" side not covered within the below course. It is an excellent course, and he intentionally strays away from some computing, so i would like to fill in the blank.
+Edit: I am going through the course below, but I am also learning the "technical" side not covered within the course below. It is an excellent course, and he intentionally strays away from some computing, so I would like to fill in the blank.
 
 I am going through the online course "Essence of linear algebra" by 3blue1brown here: https://youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&si=0ELJJx5L6hInWr1Y
 This is also serving as an extension of my C learning journey.
@@ -238,4 +238,57 @@ Reduced Row Echelon Form (RREF)
 - Column of Leading 1s - Each leading 1 is the only non-zero entry.
 
 ### Guassian Elimination
-sick so i will get this done later
+Row reduction algorithm for solving linear systems
+Operations on the augmented matrix (coefficients and constants) to simplify it into REF/RREF
+Obj are to help determine rank, determinant, and the inverse of matrices.
+
+Back to this matrix for a system of linear equations.
+[a1, b1, c1 | d1]
+[a2, b2, c2 | d2]
+[a3, b3, c3 | d3]
+
+Goal is to make it
+[0, a, b | d]
+[0, 1, c | e]
+[0, 0, 1 | f]
+
+High level steps:
+	Swap two rows
+	Multiply a row by a scalar
+	Adding a scalar multiple of one row to another
+
+Example
+1. 3x + 2y = 4
+2. x + 4y = 8
+
+[3, 2 | 4]
+[1, 4 | 8]
+
+1/3r1 = [1, 2/3 | 4/3]
+
+2r = [1, 4 | 8] - [1, 2/3, | 4/3] = [0, 10/3, 20/3]
+
+2r/(3/10) = [0, 1, 2]
+
+[1, 2/3 | 4/3]
+[0, 1   | 2]
+
+r1 = x + 2/3*2 = 4/3; x=0
+r2 = 0x + y = 2; y = 2;
+
+3x3 example:
+1. x + y + z = 6
+2. 2x + 3y + z = 14
+3. z + 2y + 3z = 14
+
+[1, 1, 1 | 6]
+[2, 3, 1 | 14]
+[1, 2, 3 | 14]
+
+r1 = [1, 1, 1 | 6]
+r2 = [0, 1, -1 | 2]
+r3 = [0, 0, 3 | 6]
+
+z = 2
+y = 4
+x = 0
