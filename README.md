@@ -292,3 +292,29 @@ r3 = [0, 0, 3 | 6]
 z = 2
 y = 4
 x = 0
+
+### Section 8 -- Nonsquare matrices as transformations between dimensions
+Square matrices (2x2, 3x3) transforms their respective dimension to the other
+
+Non-square matrices (2x3(m), 3x2(n)) changes the rank (n -> m)
+Number of columns is the input dimension
+Number of rows is the output dimension
+Cannot be inverted traditionally
+
+Ex.
+3x2
+[1 0]
+[0 1]
+[0 0]
+
+R2 -> R3
+Creates a 2D plane through 3D space.
+
+Ex.
+2x3
+[1 0 0]
+[0 1 0]
+Maps R3->R2
+"Projects" 3D vectors onto the 2D plane.
+
+Non-square matrices squash or embed space.
