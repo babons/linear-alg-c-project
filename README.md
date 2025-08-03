@@ -318,3 +318,57 @@ Maps R3->R2
 "Projects" 3D vectors onto the 2D plane.
 
 Non-square matrices squash or embed space.
+
+### Section 9 -- Dot products and duality
+- note, already implemented in project
+
+Two vectors of same dimension -- dot product is pairing the coordinates, multiplying them, and adding the result of each together.
+
+[1] [2]
+[3] [4]
+[5] [6]
+
+1*2 + 3*4 + 5*6
+
+Projecting a vector onto a line passing through the origin and the tip of another vector
+Dot product is the length of the projection multiplied by the length of the vector.
+
+i.e. v = [4 1]vert w = [2 -1]vert
+Project w onto v
+When the projection points away from V, it is negative.
+
+Perpindicular vectors result in a dotprod of 0;
+
+Order does not matter -- picture a 2D plane with the the vectors in the example:
+Projection of either onto the other are mirrored -- a line through the origin runs perfectly between them. 
+
+When a V is scaled, dot product is (2v) dot w, but that is equal to 2(v dot w).
+
+Dot product (v dot w) = c can be seen as a plane (3D) or line (2D) which is perpindicular to v. Every point on that plane/line returns the same dot product result w/ v
+
+Other words
+vector v is a "machine" which can take another vector and produce a number through the dot product
+Instead of considering where v is pointing, consider the kind of measurement v defines on other vectors
+Dot product serves as the measurement in the form of a rule or linear function.
+
+v = [2 3]
+fv(w) = v dot w = 2w + 3wy
+
+V says "multiply the first number (w.x) by (v.x) and the second (w.y) by (v.y) then add.
+
+A measure for how much a vector moves in the direction of V
+
+** notes above were for my own thought process, may be helpful or just seem like random garbage ***
+
+TOOL TESTING (haha)
+launch the tool
+input two vectors, i did [1 2 3] and [4 5 6] (3D)
+Dot product between them is 32.
+Delete the last vector (left with [1 2 3])
+Add [4 5 5]
+Dot product is 29, 3 difference.
+Repeat deletion and insertion [4 5 4]
+Dot product is 26.
+
+Evenly spaced.
+Idk it blew my mind.
