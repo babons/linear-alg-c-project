@@ -1,3 +1,5 @@
+To run the tool, use gcc *.c -o tool -lm
+
 ### Right, an actual description of what I am doing
 This repo is for notes and projects I have taken/made while learning linear alg.
 

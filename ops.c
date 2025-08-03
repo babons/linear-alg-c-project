@@ -2,7 +2,7 @@
 #include "ops.h"
 #include "io.h"
 #include "mem.h"
-#include "math.h"
+#include "lin_math.h"
 #define MAXENTRIES 128
 
 struct matrix *matrixhistory[MAXENTRIES];

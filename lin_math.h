@@ -1,5 +1,5 @@
-#ifndef MATH_H
-#define MATH_H
+#ifndef LIN_MATH_H
+#define LIN_MATH_H
 
 struct vector vectoradd(struct vector a, struct vector b);
 
@@ -15,7 +15,7 @@ double dotproduct(struct vector a, struct vector b);
 
 double magnitude(struct vector a);
 
-double lengthofprojection(struct vector a, struct vectorb);
+double lengthofprojection(struct vector a, struct vector b);
 
 struct vector crossproduct(struct vector a, struct vector b);
 
