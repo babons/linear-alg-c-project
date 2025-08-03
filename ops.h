@@ -1,5 +1,5 @@
-#ifndef VECTOROPS
-#define VECTOROPS
+#ifndef OPS_H
+#define OPS_H
 
 struct vector {
         double x;
@@ -14,34 +14,6 @@ struct matrix {
 struct vector *makevector(float x, float y, float z);
 
 struct matrix *makematrix(struct vector a, struct vector b, struct vector c);
-
-struct vector vectoradd(struct vector a, struct vector b);
-
-struct vector vscalarmult(struct vector a, float m);
-
-struct matrix mscalarmult(struct matrix a, float m);
-
-struct vector matvecmult(struct matrix m, struct vector s);
-
-struct matrix matrixmult(struct matrix a, struct matrix b);
-
-double dotproduct(struct vector a, struct vector b);
-
-struct vector crossproduct(struct vector a, struct vector b);
-
-double calcmdeterminant(struct matrix m);
-
-double calccofactor(struct matrix m, int i, int j);
-
-void getotherelement(int i, int *one, int *two);
-
-float getelement(struct matrix m, int i, int j);
-
-struct matrix cofactormatrix(struct matrix m);
-
-struct matrix tranposematrix(struct matrix m);
-
-struct matrix inversematrix(struct matrix m);
 
 void viewvectors();
 
