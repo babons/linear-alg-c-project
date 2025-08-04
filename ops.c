@@ -190,7 +190,8 @@ void performops(int n) {
 				printf ("oops: not enough vectors or no matrix\n");
 				return;
 			}
-			printf("Cross product: %.2f\n", crossproduct(*history[vector_histp - 2], *history[vector_histp - 1]));
+			printf("Cross product:\n");
+			printvector(crossproduct(*history[vector_histp - 2], *history[vector_histp - 1]));
 			waitforuser();
 			break;
 		}
