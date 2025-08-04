@@ -165,61 +165,60 @@ For 2×2 matrices:
 
 The determinant gives deep insight into the **effect of a matrix on space** — especially when composing transformations.
 
-### Section 7 - Inverse matricies, column space, and null space
+  ### Section 7 - Inverse matricies, column space, and null space
 -- Gaussian Elimination and Row Echelon Form are not covered. Will do a seperate section on those after.
-Linear system of equations -- totally haven't seen this before. But wait, it's neat.
-3x + 1y + 4z = 1
-5x + 9y + 2z = 6
-5x + 3y + 5z = 8
+  Linear system of equations -- totally haven't seen this before. But wait, it's neat.
+  3x + 1y + 4z = 1
+  5x + 9y + 2z = 6
+  5x + 3y + 5z = 8
 
-    A	   x   v
-[ 3 1 4 ] [x] [1]
-[ 5 9 2 ] [y] [6]
-[ 5 3 5 ] [z] [8]
+  A	   x   v
+    [ 3 1 4 ] [x] [1]
+    [ 5 9 2 ] [y] [6]
+    [ 5 3 5 ] [z] [8]
 
-AX = v
-A - Matrix
-X - Vector
-v - Output / Transformed Vector
+  AX = v
+  A - Matrix
+  X - Vector
+  v - Output / Transformed Vector
 
-To solve, consider a couple things
-Does the answer lower a dimension (i.e. 2D transforming into squashed line)
+  To solve, consider a couple things
+  Does the answer lower a dimension (i.e. 2D transforming into squashed line)
 
-Playing the transformation in reverse helps us when looking for the answer
+  Playing the transformation in reverse helps us when looking for the answer
 
-Inverse of A denoted by
+  Inverse of A denoted by
 
-A^-1
+  A^-1
 
-Result of (A^-1)*(A) = [], or, the identity transformation. Columns are 1,0 and 0,1
+  Result of (A^-1)*(A) = [], or, the identity transformation. Columns are 1,0 and 0,1
 
-AX = v
-(A^-1)*A*X = (A^-1)v
+  AX = v
+  (A^-1)*A*X = (A^-1)v
 
-When the determinant is 0, there is no inverse, in the function sense.
+  When the determinant is 0, there is no inverse, in the function sense.
 
-When the output of a transformation is a line, the transformation has a rank of one.
+  When the output of a transformation is a line, the transformation has a rank of one.
 
-If vectors land on a 2D plane, then it is Rank 2.
+  If vectors land on a 2D plane, then it is Rank 2.
 
-Rank is the number of dimensions in an output.
+  Rank is the number of dimensions in an output.
 
-All possible outputs of Av = column space of A.
+  All possible outputs of Av = column space of A.
 
-Span of base columns = column space
+  Span of base columns = column space
 
-Rank is the number of dimensions in the column space.
-When rank equals the number of columns in the column space, the matrix is Full Rank.
+  Rank is the number of dimensions in the column space.
+  When rank equals the number of columns in the column space, the matrix is Full Rank.
 
-When a 3D transformation squishes all of space into a line, there is an entire plane which lands on the origin.
+  When a 3D transformation squishes all of space into a line, there is an entire plane which lands on the origin.
 
-Set of vectors which land on the origin are considered "Null Space" or the "Kernel" of the matrix
+  Set of vectors which land on the origin are considered "Null Space" or the "Kernel" of the matrix
 
-Ax = v
-When v is the "zero vector" i.e. [0,0], null space gives all possible solutions.
+  Ax = v
+  When v is the "zero vector" i.e. [0,0], null space gives all possible solutions.
 
-Column space lets us know when a solution exists, null space helps us understand what the set of all possible solutions look like.
-
+  Column space lets us know when a solution exists, null space helps us understand what the set of all possible solutions look like.
 ### Row Echelon Form notes
 I learned this at some point in my academic career, definitely not for this context, though.
 
@@ -239,62 +238,61 @@ Reduced Row Echelon Form (RREF)
 - Staggered Leading Entries - Leading 1 in each row must be to the right of the leading 1
 - Column of Leading 1s - Each leading 1 is the only non-zero entry.
 
-### Guassian Elimination
-Row reduction algorithm for solving linear systems
-Operations on the augmented matrix (coefficients and constants) to simplify it into REF/RREF
-Obj are to help determine rank, determinant, and the inverse of matrices.
+  ### Guassian Elimination
+  Row reduction algorithm for solving linear systems
+  Operations on the augmented matrix (coefficients and constants) to simplify it into REF/RREF
+  Obj are to help determine rank, determinant, and the inverse of matrices.
 
-Back to this matrix for a system of linear equations.
-[a1, b1, c1 | d1]
-[a2, b2, c2 | d2]
-[a3, b3, c3 | d3]
+  Back to this matrix for a system of linear equations.
+    [a1, b1, c1 | d1]
+    [a2, b2, c2 | d2]
+    [a3, b3, c3 | d3]
 
-Goal is to make it
-[0, a, b | d]
-[0, 1, c | e]
-[0, 0, 1 | f]
+  Goal is to make it
+    [0, a, b | d]
+    [0, 1, c | e]
+    [0, 0, 1 | f]
 
-High level steps:
-	Swap two rows
-	Multiply a row by a scalar
-	Adding a scalar multiple of one row to another
+  High level steps:
+  Swap two rows
+  Multiply a row by a scalar
+  Adding a scalar multiple of one row to another
 
-Example
-1. 3x + 2y = 4
-2. x + 4y = 8
+  Example
+    1. 3x + 2y = 4
+    2. x + 4y = 8
 
-[3, 2 | 4]
-[1, 4 | 8]
+    [3, 2 | 4]
+    [1, 4 | 8]
 
-1/3r1 = [1, 2/3 | 4/3]
+  1/3r1 = [1, 2/3 | 4/3]
 
-2r = [1, 4 | 8] - [1, 2/3, | 4/3] = [0, 10/3, 20/3]
+  2r = [1, 4 | 8] - [1, 2/3, | 4/3] = [0, 10/3, 20/3]
 
-2r/(3/10) = [0, 1, 2]
+  2r/(3/10) = [0, 1, 2]
 
-[1, 2/3 | 4/3]
-[0, 1   | 2]
+    [1, 2/3 | 4/3]
+    [0, 1   | 2]
 
-r1 = x + 2/3*2 = 4/3; x=0
-r2 = 0x + y = 2; y = 2;
+    r1 = x + 2/3*2 = 4/3; x=0
+    r2 = 0x + y = 2; y = 2;
 
-3x3 example:
-1. x + y + z = 6
-2. 2x + 3y + z = 14
-3. z + 2y + 3z = 14
+  3x3 example:
+    1. x + y + z = 6
+    2. 2x + 3y + z = 14
+    3. z + 2y + 3z = 14
 
-[1, 1, 1 | 6]
-[2, 3, 1 | 14]
-[1, 2, 3 | 14]
+    [1, 1, 1 | 6]
+    [2, 3, 1 | 14]
+    [1, 2, 3 | 14]
 
-r1 = [1, 1, 1 | 6]
-r2 = [0, 1, -1 | 2]
-r3 = [0, 0, 3 | 6]
+    r1 = [1, 1, 1 | 6]
+    r2 = [0, 1, -1 | 2]
+    r3 = [0, 0, 3 | 6]
 
-z = 2
-y = 4
-x = 0
-
+  z = 2
+  y = 4
+  x = 0
 ### Section 8 -- Nonsquare matrices as transformations between dimensions
 Square matrices (2x2, 3x3) transforms their respective dimension to the other
 
