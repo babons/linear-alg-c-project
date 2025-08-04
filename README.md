@@ -374,3 +374,59 @@ Dot product is 26.
 
 Evenly spaced.
 Idk it blew my mind.
+
+# Section 10 -- Cross Products (Into)
+- note: I have already implemented this, I know. I would still like to take notes on it from the course.
+
+Two vectors v w creating a parallelogram
+v to the tip of w and w to the tip of v
+
+v X w = area
+If v is on the right of W - positive
+If w is on the right of V - negative
+***ORDER MATTERS
+
+Cross product = 
+Coordinates of V into a column, W into a second column within a 2x2 matrix. Then, compute the determinant.
+
+Scaling a vector scales the cross product the same i.e. 3v X w = 3(v X w)
+
+Cross product 3D
+Cross product results in a vector
+The area of the parallelogram is the length of the resulting vector
+Direction is perpindicular to the parallelogram
+
+Cross product can also be calculated this peculiar way
+
+[v1]   [w1]  	   [i v1 w1]
+[v2] x [w2] = det( [j v2 w2] )
+[v3]   [w3]  	   [k v3 w3]
+
+### Section 11 -- Cross products in the light of linear transformations
+When performing linear transformations to the number line (2d to 1d), there exists a vector which matches it, and it is called the dual vector.
+
+In 3D, cross product is not computated as u X v X x = det([u] [v] [w])
+Cross product is taking two vectors and taking its determinant
+
+f([x y z]) = det([[x, y, z | v | w]])
+v & w are constant
+Linear function
+
+3D to 1D
+P dot prod X (where P is a 1D vector but flipped vertically)
+The unique combinations of v and w in the above linear function are what map out P
+p1 = v2*w3-v3*w2
+p2 = v3*w1-v1*w3
+p3 = v1*w3-v2*w1
+
+What vector P has the property that the product between p and a vector x, it gives the same result as plugging in x to the first column of a matrix whos other columns are v and w.
+
+Reminder on dot product:
+p dot x = (lengthofproject) X (length of P)
+	Project another vector onto P
+
+Calculate the volume of the parallelapiped
+	- Take the area of the parallelogram v & w
+	- multiply it by the component of x that is perpindicular to v and w
+
+The dual vector P must be perpindicular to v and w with a length equal to the area of the parallelogram spanned out by the two vectors.
