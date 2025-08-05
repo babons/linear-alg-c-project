@@ -373,7 +373,7 @@ Dot product is 26.
 Evenly spaced.
 Idk it blew my mind.
 
-# Section 10 -- Cross Products (Into)
+### Section 10 -- Cross Products (Into)
 - note: I have already implemented this, I know. I would still like to take notes on it from the course.
 
 Two vectors v w creating a parallelogram
@@ -428,3 +428,55 @@ Calculate the volume of the parallelapiped
 	- multiply it by the component of x that is perpindicular to v and w
 
 The dual vector P must be perpindicular to v and w with a length equal to the area of the parallelogram spanned out by the two vectors.
+
+### Section 12 - Cramer's rule
+Solution to linear systems
+
+Gaussian elimination is more effective
+Helpful exercise to deepend knowledge of theory
+
+3x + 2y = -4
+-1x + 2y = -2
+
+[ 3 2 ][x]=[-4]
+[-1 2 ][y]=[-2]
+
+Known matrix transforming an unknown vector [x, y] knowing output is [-4, -2]
+Each column of the matrix above defines the base vectors of the input space
+
+What linear combination gets us [-4, -2]?
+If the determinant is 0, either no inputs stick or many inputs stick
+
+WRONG (Intentionally):
+X coordinate the the vector being solved is the dot product with the basis vector, same thing with Y
+Dot products of the transformed mystery vector and the basis vectors would lead to the desired output, [-4, -2].
+
+Dot product before and after will be extremely different.
+When vectors stretch out, dot product increases
+Transformations which preserve the same dot product are call Orthonormal
+	Leaves all basis vectors perindicular and equal lengths
+	Solving these is easy -- taking the dot product of the output and all the columns of the matrix is the same as taking the dot product between the mystery input vector and all the basis vectors
+x = output dot column1
+y = output dot column2
+
+Consider the parallelagram created by i-hat and the mystery point.
+	Signed Area = 1 X y
+	Same with j-hat
+	Area = 1 X x
+
+i-hat, j-hat, k-hat = 1
+z is the determinant of the matrix where i-hat and j-hat take the first and second columns and the mystery vector takes the third
+y when replacing j-hat with the mystery vector
+x when replacing i-hat
+
+Why is this important? All areas get scaled by the determinant of the transformation vector
+
+With the signed area being y, you can find the value by dividing the Area by the determinant of the transformation matrix.
+
+Area / det(A) = (determinant of the transformation matrix with y replaced by the output) / (determinant of the transformation vector)
+
+det(transformation matrix w/ y) = Area
+
+Same thing can be done for X
+Cramer's Rule
+
