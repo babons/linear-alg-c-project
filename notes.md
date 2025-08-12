@@ -521,3 +521,89 @@ Then the inverse matrix to return the vector to their system
 In math, an expression like A^-1(M)(A) suggests a mathematical empathy
 	The matrix is what we see
 	Outer two matrices represent the shift in perspective
+
+### Section 14 - Eigenvectors and eigenvalues
+Consider a 2D transformation
+i-hat -> [3, 0]; j-hat -> [1, 2]; [3, 0 | 1, 2]
+
+Vector gets knocked off of initial span
+Some vectors stay on their span -- transformation just squishes or stretches
+
+Vectors which stay on their span after a transformation are called eigenvectors
+
+Eigenvalue is the factor by which the vectors is stretched or squished
+
+An eigenvector in 3D is considered an axis of rotation
+
+Av = (Lambda)v (scalar mult)
+
+Find v and lamba which make it true
+
+Lambda scaling:
+[L 0 0]
+[0 L 0]
+[0 0 L]
+
+(L*I(Identity Vector))v
+
+(A - LI)v = 0
+Only way for this to be 0 is if the transformation results in a lower dimension -- det(A-LI) = 0
+
+Imagine turning a knob -- find the right value of lambda such that the transformation squishes space into a lower dimension.
+
+When a matrix has zeros everywhere but the diagonal, it is a diagonal matrix. All basis vectors are eigenvectors
+
+Linearly independent eigenvectors can be used as a basis -- A scales along each coordinate axis
+
+### Section 15 - A quick trick for computing eigenvalues
+The "Trace" of a matrix is the sum of the diagonal vectors, which is also the sum of the eigenvalues. Also, the mean.
+
+The Detertimnant of a matrix is equal to the product of the two eigenvalues
+
+Third important factor is calculating the two eigenvalues while knowing their mean and product
+
+Example:
+[8 4]
+[2 6]
+
+m = 7, p = 40
+
+L1 and L2 are an equal distance (d) away from m, 7, and their product is 40.
+
+40 = (7+d)(7-d) = 7^2 - d^2 (chatacteristic polynomial of the matrix)
+d^2 = 7^2 - 40
+d^2 = 9
+d = 3
+
+So 3 in either direction makes L1 4 and L2 10. (7 +- 4).
+
+p = m^2-d^2 = (m+d)(m-d)
+d^2 = m^2 - p
+L1,L2 = m +- sqr(m^2 - p)
+
+Pauli Spin Matrices
+[0 1]
+[1 0]
+
+[0 -i]
+[i 0]
+
+[1 0]
+[0 1]
+
+Eigenvalues of matrices are relevant to physics they describe
+Mean in all 3 is zero -- eigenvalues are +- 1
+
+These matrices describe observations you might make about a particle's spin in the X, Y, or Z direction.
+Because eigenvalues are +- 1, the observed spin is in one direction.
+
+x^2 - 10x + 9
+
+x^2 - (L1 + L2)x + L1*L2
+
+(x - L1)(x - L2)
+
+If polynomial is normalized, mean of the roots will be -1/2 times the linear coefficient -1/2 * -(L1 + L2) = 5 -- (-1(L1 + L2) = 10)
+
+Product is the constant term.
+L1,L2 = 5+- sqr(25 - 9)
