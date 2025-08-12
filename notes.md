@@ -558,7 +558,7 @@ Linearly independent eigenvectors can be used as a basis -- A scales along each 
 ### Section 15 - A quick trick for computing eigenvalues
 The "Trace" of a matrix is the sum of the diagonal vectors, which is also the sum of the eigenvalues. Also, the mean.
 
-The Detertimnant of a matrix is equal to the product of the two eigenvalues
+The Detertiminant of a matrix is equal to the product of the two eigenvalues
 
 Third important factor is calculating the two eigenvalues while knowing their mean and product
 
@@ -607,3 +607,94 @@ If polynomial is normalized, mean of the roots will be -1/2 times the linear coe
 
 Product is the constant term.
 L1,L2 = 5+- sqr(25 - 9)
+
+### Section 16 - Abstract vector spaces (last one for this course!)
+Consider a linear transformation for functions, take one function and turn it to another
+
+The derivative is an example
+
+These "linear transformations" are very similar if not the same as "lineaer operators"
+
+What does it mean for a transformation of functions to be linear?
+	Additivity: L(v+w) = L(v) + L(w)
+		If you add to vectors together and transform their sum, you get the same result as if you added the transformed versions of the original vectors.
+	Scaling: 	L(cv) = cL(v)
+		The scaled version of v is the same when the original is transformed and scaled by the same amount
+	Linear transformation "perserve" these
+
+Linear transformation is described by where it takes the basis vectors
+	This is what allows for vector multiplication
+
+We know that d/dx is linear
+	Taking the derivative of two added functions is the same as adding the derivatives of each one seperately.
+	Scaling the function before taking the derivative is the same as scaling the derivative
+
+Describing derivative with a matrix
+	All polynomials (x^2 + 3x + 5 for example)
+
+	1. Give coordinates
+		Choose basis
+		The polynomial is written as a linear combination, just choose the powers of x as the basis function
+		1x^2 + 3x + 5*1 -- basis functions are
+			b0(x) = 1
+			b1(x) = x
+			b2(x) = x^2
+			b3(x) = x^3
+			...
+		Basis vectors roles are similar to the roles of i-hat, j-hat, k-hat
+	2. 5*b0 + 3*b1 + 1*b3 + 0*x^4 + 0*x^5...
+		This above is our single column space
+		4x^7 - 5x^2 would have coords
+		[0 0 -5 0 0 0 0 4...] (single column)
+Ex:
+[0 1 0 0 ...]
+[0 0 2 0 ...]
+[0 0 0 3 ...] = d/dx(1x^3 + 5x^2 + 4x + 5)
+[0 0 0 0 ...]
+[...]
+
+Take the coords repping the polynomial (5, 4, 5, 1) and line them up along the rows of the matrix, top to bottom (i.e. 5 first, 4 next, 5 again)
+
+1 is in the second column of the matrix, and the second coordinate is 4, so the first number of d/dx is 4 (1*4). Then, third column has 2, and the matching coordinate is 5, making the second 10 (2*5). 
+
+Output: 3x^2 + 10x + 4
+This is linear, here is another way of looking at it:
+
+Coords in basis {1,x,x^2,x^3}
+	[5, 4, 5, 1]
+
+Deritative matrix in that basis
+[ 0 1 0 0]
+[ 0 0 2 0]
+[ 0 0 0 3]
+[ 0 0 0 0]
+
+D * (the above matrix) = [4, 10, 3, 0] = 4 + 10x + 3x^2
+
+
+If you took the deritative of each "basic function" (i.e. b0(x) = 1; b1(x) = x) individually and put them in a matrix, it would map up the same
+
+Linear Algebra Concepts | Names When Applied to Functions
+Linear Transformations	  Linear Operators
+Dot products			  Inner products
+Eigenvectors			  Eigenfunctions
+
+Axioms; Rules for vectors addition and scaling:
+1. u + (v + w) = (u + v) + w
+2. v + w = w + v
+3. There is a vector 0 such that 0 + v = v for all v
+4. For every vector v there is a vector -v so that v + (-v) = 0
+5. a(bv) = (ab)v
+6. 1v = v
+7. a(v + w) = av + aw
+8. (a + b)v = av + bv
+
+Any vector space must statisfy all of these in order to apply all the other 600 lines of notes
+
+Axioms are more of an interface? Between "me, the mathematician, discovering results, and others who want to apply the results to other types of vector spaces.
+
+Your results can be applied by others if discussed in terms of the axioms.
+
+The answer to what is a vector is... it doesn't matter. At least, the form does not matter. Could be an arrow, number, whatever, so long as it follows the axiums.
+
+Like asking what is 3? It's a triplet of things, anything. The number 3 is an abstract thing which allows you to reason about all possible triplets.
