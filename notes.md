@@ -59,7 +59,7 @@ Linear algebra revolves around these concepts
 
 3D vector span
 	Collection of all possible linear combinations of the two vectors
-	Think of the span of two 3D vectors as a sheet -- while they -- eurika moment
+	Think of the span of two 3D vectors as a sheet — while they — eureka moment
 	2 vector linear combo in 3d creates a 2d plane
 
 	3 vector linear combos in 3d spans the 3d plane
@@ -82,17 +82,17 @@ Linear transformation
 			The origin remains fixed in place
 		Keeps grid lines parallel and evenly spaced
 		
-Describing trnasformations numerically
+Describing transformations numerically
 	Need to record where base vectors lie
 		v = [-1, 2] = -1i + 2j
 		Transformed v = -1(Transformed i) + 2(Transformed j)
 	Allows you to know where v is with knowing where i-hat and j-hat are
-		Transformed i = [1, -2]; transformed j = [3, 0]
+		Transformed I = [1, -2]; transformed j = [3, 0]
 		Transformed v = -1[1, -2] + 2[3, 0]
 		Transformed v = [-1, 2] + [6, 0] = [5, 2]
 Linear transformations are described by four numbers:
 	Two coordinates for where i-hat lands [3, -2]
-	Two cooredinates for where j-hat lands [2, 1]
+	Two coordinates for where j-hat lands [2, 1]
 	[3, -2 | 2, 1]
 	Vector [5, 7]
 		5[3, -2] + 7[2, 1]
@@ -153,7 +153,7 @@ The **determinant** of a matrix measures how a transformation **scales space**:
 - **3D:** it gives the **volume scaling factor**
 
 Important interpretations:
-- `det = 0`: Transformation **collapses space** (e.g. to a line or point); not invertible
+- `det = 0`: Transformation **collapses space** (e.g., to a line or point); not invertible
 - `det < 0`: Transformation **flips** orientation (reflection)
 - `det > 0`: Orientation is **preserved**
 
@@ -165,9 +165,9 @@ For 2×2 matrices:
 
 The determinant gives deep insight into the **effect of a matrix on space** — especially when composing transformations.
 
-  ### Section 7 - Inverse matricies, column space, and null space
--- Gaussian Elimination and Row Echelon Form are not covered. Will do a seperate section on those after.
-  Linear system of equations -- totally haven't seen this before. But wait, it's neat.
+  ### Section 7 - Inverse matrices, column space, and null space
+-- Gaussian Elimination and Row Echelon Form are not covered. Will do a separate section on those after.
+  Linear system of equations — totally hadn't seen this before. But wait, it's neat.
   3x + 1y + 4z = 1
   5x + 9y + 2z = 6
   5x + 3y + 5z = 8
@@ -216,7 +216,7 @@ The determinant gives deep insight into the **effect of a matrix on space** — 
   Set of vectors which land on the origin are considered "Null Space" or the "Kernel" of the matrix
 
   Ax = v
-  When v is the "zero vector" i.e. [0,0], null space gives all possible solutions.
+  When v is the "zero vector" i.e., [0,0], null space gives all possible solutions.
 
   Column space lets us know when a solution exists, null space helps us understand what the set of all possible solutions look like.
 ### Row Echelon Form notes
@@ -227,7 +227,7 @@ Row Echelon Form (REF)
 If a matrix is in REF there are a set of properties:
 Zero Rows at the buttom - If any rows are all zeros, they should be at the bottom
 
-Leading 1s - First entry of a non-zero row (leading entry) can be any non-zero numner
+Leading 1s - First entry of a non-zero row (leading entry) can be any non-zero number
 
 Staggered Leading 1s - Leading entry in a row must be to the right of the leading entry in the row above it.
 
@@ -238,7 +238,7 @@ Reduced Row Echelon Form (RREF)
 - Staggered Leading Entries - Leading 1 in each row must be to the right of the leading 1
 - Column of Leading 1s - Each leading 1 is the only non-zero entry.
 
-  ### Guassian Elimination
+  ### Gaussian Elimination
   Row reduction algorithm for solving linear systems
   Operations on the augmented matrix (coefficients and constants) to simplify it into REF/RREF
   Obj are to help determine rank, determinant, and the inverse of matrices.
@@ -293,7 +293,7 @@ Reduced Row Echelon Form (RREF)
   z = 2
   y = 4
   x = 0
-### Section 8 -- Nonsquare matrices as transformations between dimensions
+### Section 8 — Nonsquare matrices as transformations between dimensions
 Square matrices (2x2, 3x3) transforms their respective dimension to the other
 
 Non-square matrices (2x3(m), 3x2(n)) changes the rank (n -> m)
@@ -319,10 +319,10 @@ Maps R3->R2
 
 Non-square matrices squash or embed space.
 
-### Section 9 -- Dot products and duality
+### Section 9 — Dot products and duality
 - note, already implemented in project
 
-Two vectors of same dimension -- dot product is pairing the coordinates, multiplying them, and adding the result of each together.
+Two vectors of same dimension — dot product is pairing the coordinates, multiplying them, and adding the result of each together.
 
 [1] [2]
 [3] [4]
@@ -333,18 +333,18 @@ Two vectors of same dimension -- dot product is pairing the coordinates, multipl
 Projecting a vector onto a line passing through the origin and the tip of another vector
 Dot product is the length of the projection multiplied by the length of the vector.
 
-i.e. v = [4 1]vert w = [2 -1]vert
+i.e. v = [4 1]vector w = [2 -1]vector
 Project w onto v
 When the projection points away from V, it is negative.
 
-Perpindicular vectors result in a dotprod of 0;
+Perpendicular vectors result in a dotprod of 0;
 
-Order does not matter -- picture a 2D plane with the the vectors in the example:
-Projection of either onto the other are mirrored -- a line through the origin runs perfectly between them. 
+Order does not matter — picture a 2D plane with the vectors in the example:
+Projection of either onto the other are mirrored — a line through the origin runs perfectly between them. 
 
 When a V is scaled, dot product is (2v) dot w, but that is equal to 2(v dot w).
 
-Dot product (v dot w) = c can be seen as a plane (3D) or line (2D) which is perpindicular to v. Every point on that plane/line returns the same dot product result w/ v
+Dot product (v dot w) = c can be seen as a plane (3D) or line (2D) which is Perpendicular to v. Every point on that plane/line returns the same dot product result w/ v
 
 Other words
 vector v is a "machine" which can take another vector and produce a number through the dot product
@@ -362,7 +362,7 @@ A measure for how much a vector moves in the direction of V
 
 TOOL TESTING (haha)
 launch the tool
-input two vectors, i did [1 2 3] and [4 5 6] (3D)
+input two vectors, I did [1 2 3] and [4 5 6] (3D)
 Dot product between them is 32.
 Delete the last vector (left with [1 2 3])
 Add [4 5 5]
@@ -373,7 +373,7 @@ Dot product is 26.
 Evenly spaced.
 Idk it blew my mind.
 
-### Section 10 -- Cross Products (Into)
+### Section 10 — Cross Products (Into)
 - note: I have already implemented this, I know. I would still like to take notes on it from the course.
 
 Two vectors v w creating a parallelogram
@@ -387,12 +387,12 @@ If w is on the right of V - negative
 Cross product = 
 Coordinates of V into a column, W into a second column within a 2x2 matrix. Then, compute the determinant.
 
-Scaling a vector scales the cross product the same i.e. 3v X w = 3(v X w)
+Scaling a vector scales the cross product the same i.e., 3v X w = 3(v X w)
 
 Cross product 3D
 Cross product results in a vector
 The area of the parallelogram is the length of the resulting vector
-Direction is perpindicular to the parallelogram
+Direction is Perpendicular to the parallelogram
 
 Cross product can also be calculated this peculiar way
 
@@ -400,7 +400,7 @@ Cross product can also be calculated this peculiar way
 [v2] x [w2] = det( [j v2 w2] )
 [v3]   [w3]  	   [k v3 w3]
 
-### Section 11 -- Cross products in the light of linear transformations
+### Section 11 — Cross products in the light of linear transformations
 When performing linear transformations to the number line (2d to 1d), there exists a vector which matches it, and it is called the dual vector.
 
 In 3D, cross product is not computated as u X v X x = det([u] [v] [w])
@@ -417,7 +417,7 @@ p1 = v2*w3-v3*w2
 p2 = v3*w1-v1*w3
 p3 = v1*w3-v2*w1
 
-What vector P has the property that the product between p and a vector x, it gives the same result as plugging in x to the first column of a matrix whos other columns are v and w.
+What vector P has the property that the product between p and a vector x, it gives the same result as plugging in x to the first column of a matrix whose other columns are v and w.
 
 Reminder on dot product:
 p dot x = (lengthofproject) X (length of P)
@@ -425,15 +425,15 @@ p dot x = (lengthofproject) X (length of P)
 
 Calculate the volume of the parallelapiped
 	- Take the area of the parallelogram v & w
-	- multiply it by the component of x that is perpindicular to v and w
+	- multiply it by the component of x that is Perpendicular to v and w
 
-The dual vector P must be perpindicular to v and w with a length equal to the area of the parallelogram spanned out by the two vectors.
+The dual vector P must be Perpendicular to v and w with a length equal to the area of the parallelogram spanned out by the two vectors.
 
 ### Section 12 - Cramer's rule
 Solution to linear systems
 
 Gaussian elimination is more effective
-Helpful exercise to deepend knowledge of theory
+Helpful exercise to deepen knowledge of theory
 
 3x + 2y = -4
 -1x + 2y = -2
@@ -448,14 +448,14 @@ What linear combination gets us [-4, -2]?
 If the determinant is 0, either no inputs stick or many inputs stick
 
 WRONG (Intentionally):
-X coordinate the the vector being solved is the dot product with the basis vector, same thing with Y
+X coordinate the vector being solved is the dot product with the basis vector, same thing with Y
 Dot products of the transformed mystery vector and the basis vectors would lead to the desired output, [-4, -2].
 
 Dot product before and after will be extremely different.
 When vectors stretch out, dot product increases
 Transformations which preserve the same dot product are call Orthonormal
-	Leaves all basis vectors perindicular and equal lengths
-	Solving these is easy -- taking the dot product of the output and all the columns of the matrix is the same as taking the dot product between the mystery input vector and all the basis vectors
+	Leaves all basis vectors perpendicular and equal lengths
+	Solving these is easy — taking the dot product of the output and all the columns of the matrix is the same as taking the dot product between the mystery input vector and all the basis vectors
 x = output dot column1
 y = output dot column2
 
@@ -482,7 +482,7 @@ Cramer's Rule
 
 ### Section 13 - Change of basis
 
-i-hate and j-hat encapsulate all implicit assumptions of the coordinate system
+i-hat and j-hat encapsulate all implicit assumptions of the coordinate system
  - First indicates rightward motion
  - Second indicates upward motion
  - Unit of distance
@@ -507,7 +507,7 @@ Could compute the translationby taking the vector in their language and multiply
 -1[2, 1] + 2[-1, 1] = [-4, 1]
 This is how it is seen in our coordinate system while, again, in their system it looks like [-1, 2].
 
-Matrix vector mutiplication. Matrix has columns representing their basis vectors
+Matrix vector multiplication. Matrix has columns representing their basis vectors
 [2, 1 | -1 ,2][-1, 2] 
 
 For the other way around, inverse the transformation we need to make in order to interpret vectors in their system. The put the vector in our system through it.
@@ -527,7 +527,7 @@ Consider a 2D transformation
 i-hat -> [3, 0]; j-hat -> [1, 2]; [3, 0 | 1, 2]
 
 Vector gets knocked off of initial span
-Some vectors stay on their span -- transformation just squishes or stretches
+Some vectors stay on their span — transformation just squishes or stretches
 
 Vectors which stay on their span after a transformation are called eigenvectors
 
@@ -547,18 +547,18 @@ Lambda scaling:
 (L*I(Identity Vector))v
 
 (A - LI)v = 0
-Only way for this to be 0 is if the transformation results in a lower dimension -- det(A-LI) = 0
+Only way for this to be 0 is if the transformation results in a lower dimension — det(A-LI) = 0
 
-Imagine turning a knob -- find the right value of lambda such that the transformation squishes space into a lower dimension.
+Imagine turning a knob — find the right value of lambda such that the transformation squishes space into a lower dimension.
 
 When a matrix has zeros everywhere but the diagonal, it is a diagonal matrix. All basis vectors are eigenvectors
 
-Linearly independent eigenvectors can be used as a basis -- A scales along each coordinate axis
+Linearly independent eigenvectors can be used as a basis — A scales along each coordinate axis
 
 ### Section 15 - A quick trick for computing eigenvalues
 The "Trace" of a matrix is the sum of the diagonal vectors, which is also the sum of the eigenvalues. Also, the mean.
 
-The Detertiminant of a matrix is equal to the product of the two eigenvalues
+The Determinant of a matrix is equal to the product of the two eigenvalues
 
 Third important factor is calculating the two eigenvalues while knowing their mean and product
 
@@ -581,7 +581,7 @@ p = m^2-d^2 = (m+d)(m-d)
 d^2 = m^2 - p
 L1,L2 = m +- sqr(m^2 - p)
 
-Pauli Spin Matrices
+Pauli spin matrices
 [0 1]
 [1 0]
 
@@ -592,7 +592,7 @@ Pauli Spin Matrices
 [0 1]
 
 Eigenvalues of matrices are relevant to physics they describe
-Mean in all 3 is zero -- eigenvalues are +- 1
+Mean in all 3 is zero — eigenvalues are +- 1
 
 These matrices describe observations you might make about a particle's spin in the X, Y, or Z direction.
 Because eigenvalues are +- 1, the observed spin is in one direction.
@@ -603,7 +603,7 @@ x^2 - (L1 + L2)x + L1*L2
 
 (x - L1)(x - L2)
 
-If polynomial is normalized, mean of the roots will be -1/2 times the linear coefficient -1/2 * -(L1 + L2) = 5 -- (-1(L1 + L2) = 10)
+If polynomial is normalized, mean of the roots will be -1/2 times the linear coefficient -1/2 * -(L1 + L2) = 5 — (-1(L1 + L2) = 10)
 
 Product is the constant term.
 L1,L2 = 5+- sqr(25 - 9)
@@ -613,20 +613,20 @@ Consider a linear transformation for functions, take one function and turn it to
 
 The derivative is an example
 
-These "linear transformations" are very similar if not the same as "lineaer operators"
+These "linear transformations" are very similar if not the same as "linear operators"
 
 What does it mean for a transformation of functions to be linear?
 	Additivity: L(v+w) = L(v) + L(w)
 		If you add to vectors together and transform their sum, you get the same result as if you added the transformed versions of the original vectors.
 	Scaling: 	L(cv) = cL(v)
 		The scaled version of v is the same when the original is transformed and scaled by the same amount
-	Linear transformation "perserve" these
+	Linear transformation "preserve" these
 
 Linear transformation is described by where it takes the basis vectors
 	This is what allows for vector multiplication
 
 We know that d/dx is linear
-	Taking the derivative of two added functions is the same as adding the derivatives of each one seperately.
+	Taking the derivative of two added functions is the same as adding the derivatives of each one separately.
 	Scaling the function before taking the derivative is the same as scaling the derivative
 
 Describing derivative with a matrix
@@ -635,7 +635,7 @@ Describing derivative with a matrix
 	1. Give coordinates
 		Choose basis
 		The polynomial is written as a linear combination, just choose the powers of x as the basis function
-		1x^2 + 3x + 5*1 -- basis functions are
+		1x^2 + 3x + 5*1 — basis functions are
 			b0(x) = 1
 			b1(x) = x
 			b2(x) = x^2
@@ -663,7 +663,7 @@ This is linear, here is another way of looking at it:
 Coords in basis {1,x,x^2,x^3}
 	[5, 4, 5, 1]
 
-Deritative matrix in that basis
+Derivative matrix in that basis
 [ 0 1 0 0]
 [ 0 0 2 0]
 [ 0 0 0 3]
@@ -672,7 +672,7 @@ Deritative matrix in that basis
 D * (the above matrix) = [4, 10, 3, 0] = 4 + 10x + 3x^2
 
 
-If you took the deritative of each "basic function" (i.e. b0(x) = 1; b1(x) = x) individually and put them in a matrix, it would map up the same
+If you took the derivative of each "basic function" (i.e. b0(x) = 1; b1(x) = x) individually and put them in a matrix, it would map up the same
 
 Linear Algebra Concepts | Names When Applied to Functions
 Linear Transformations	  Linear Operators
@@ -689,12 +689,12 @@ Axioms; Rules for vectors addition and scaling:
 7. a(v + w) = av + aw
 8. (a + b)v = av + bv
 
-Any vector space must statisfy all of these in order to apply all the other 600 lines of notes
+Any vector space must satisfy all of these in order to apply all the other 600 lines of notes
 
 Axioms are more of an interface? Between "me, the mathematician, discovering results, and others who want to apply the results to other types of vector spaces.
 
 Your results can be applied by others if discussed in terms of the axioms.
 
-The answer to what is a vector is... it doesn't matter. At least, the form does not matter. Could be an arrow, number, whatever, so long as it follows the axiums.
+The answer to what is a vector is... it doesn't matter. At least, the form does not matter. Could be an arrow, number, whatever, so long as it follows the axioms.
 
 Like asking what is 3? It's a triplet of things, anything. The number 3 is an abstract thing which allows you to reason about all possible triplets.
