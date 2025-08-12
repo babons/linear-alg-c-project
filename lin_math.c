@@ -172,3 +172,17 @@ struct matrix inversematrix(struct matrix m) {
 
 	return inverse;
 }
+
+void calceigenvalue(struct matrix2x2 m, double *l1, double *l2) {
+	double mean = (m.cols[0].x + m.cols[1].y) / 2; // mean
+	double determinant = m.cols[0].x * m.cols[1].y - m.cols[1].x * m.cols[0].y; // product
+	double discriminant = mean * mean - determinant;
+
+	if (discriminant < 0) {
+		printf("oops: not vector not supported");
+		*l1 = *l2 = 0;
+	}
+
+	*l1 = ((mean + sqrt((mean * mean) - determinant)));
+	*l2 = ((mean - sqrt((mean * mean) - determinant)));
+}

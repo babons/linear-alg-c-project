@@ -14,6 +14,13 @@ void readmatrix(struct matrix *m) {
 	}
 }
 
+void readmatrix2x2(struct matrix2x2 *m) {
+	for (int i = 0; i < 2; i++) {
+		printf("Enter col %d (x y): ", i+1);
+		readvector2x2(&m->cols[i]);
+	}
+}
+
 void readvector(struct vector *v) {
 	float x, y, z;
 	int c;
@@ -24,6 +31,19 @@ void readvector(struct vector *v) {
 	v->x = x;
 	v->y = y;
 	v->z = z;
+
+	while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void readvector2x2(struct vector2x2 *v) {
+	float x, y;
+	int c;
+	x = y = 0;
+
+	printf("Enter your vector: (i, j): ");
+	scanf("%f %f", &x, &y);
+	v->x = x;
+	v->y = y;
 
 	while ((c = getchar()) != '\n' && c != EOF);
 }
@@ -67,6 +87,7 @@ void printoptions() {
 		printf("11. Calculate the cofactor matrix\n");
 		printf("12. Transpose matrix\n");
 		printf("13. Inverse matrix calculation\n");
+		printf("14. Eigenvalue calculation (2x2)\n");
 		printf("94. Print vector history\n");
 		printf("95. Print matrix history\n");
 		printf("96. Delete last vector\n");

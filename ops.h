@@ -7,8 +7,17 @@ struct vector {
         double z;
 };
 
+struct vector2x2 {
+        double x;
+        double y;
+};
+
 struct matrix {
 	struct vector cols[3];
+};
+
+struct matrix2x2 {
+        struct vector2x2 cols[2];
 };
 
 struct vector *makevector(float x, float y, float z);

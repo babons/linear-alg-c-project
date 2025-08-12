@@ -33,4 +33,6 @@ struct matrix transposematrix(struct matrix m);
 
 struct matrix inversematrix(struct matrix m);
 
+void calceigenvalue(struct matrix2x2 m, double *l1, double *l2);
+
 #endif

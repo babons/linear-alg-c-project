@@ -234,6 +234,15 @@ void performops(int n) {
 			printmatrix(r);
 			waitforuser();
 			break;
+		} case 14: { // calc eigen values
+			struct matrix2x2 r;
+			double l1;
+			double l2;
+			readmatrix2x2(&r);
+			calceigenvalue(r, &l1, &l2);
+			printf("Eigen Values: %.2f, %.2f\n", l1, l2);
+			waitforuser();
+			break;
 		}
 		case 94: {
 			viewvectors();
