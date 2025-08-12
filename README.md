@@ -15,6 +15,7 @@ This is an interactive command-line tool for experimenting with linear algebra i
 - [x] Cofactor matrix
 - [x] Matrix transpose
 - [x] Matrix inverse (via adjugate method)
+- [x] Eigenvalue calculation
 - [x] View and delete vector/matrix history
 
 ## C Techniques and Concepts Used
@@ -38,4 +39,5 @@ gcc *.c -o lin_tool -lm
 
 - The tool operates entirely in 3D (vectors with 3 components, 3×3 matrices).
 - All input is manual via terminal.
+
 - Intended for educational use — emphasizes understanding over performance.
